@@ -1,5 +1,5 @@
 <?php 
-require 'config.php';
+require 'connection/config.php';
 if(!empty($_SESSION['Customer_id'])){
     $Customer_id=$_SESSION['Customer_id'];
    $result= mysqli_query($conn, "SELECT * FROM c_signup WHERE Customer_id=$Customer_id");
@@ -21,7 +21,7 @@ else{
 <body>
 
 
-    <h3>Welcome <?php echo $row["Full_name"]; ?></h3>
+    <h3>Welcome <?php echo $row["Email"]; ?></h3>
     <a href="logout.php">Logout</a>
     
 </body>

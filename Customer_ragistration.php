@@ -1,5 +1,5 @@
 <?php 
-require './connection/config.php';
+require 'connection/config.php';
 if(isset($_POST["submit"])){
  $Full_name = $_POST["Full_name"];   
  $City_village = $_POST["City_village"];   
@@ -21,7 +21,7 @@ else{
         $query = "INSERT INTO c_signup VALUES('','$Full_name','$City_village','$State','$District','$Pin','$Mobile','$Email','$Password','$Repassword')";
         mysqli_query($conn,$query);
         echo
-        "<script> alert('Ragistration Sussefully');</script>";
+        "<script> alert('Registration Sussefully');</script>";
     }
     else{
         echo
@@ -40,46 +40,57 @@ else{
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Customer Ragistration</title>
+    <title>Customer Registration</title>
+    <link rel="stylesheet" href="./Css/Style2.css">
 </head>
 <body>
-
+    <div class="rag-form">
     <h3>Customer Sign Up</h3>
     <form class="" action="" method="post" autocomplete="off">
-        <label for="Full_name">Full name :</label>
+        <label for="Full_name" class="full-name">Full name :</label>
         <input type="text" name="Full_name" id="Full_name" required value="" ><br>
 
-        <label for="">Address :</label><br>
+        <label for="">Address </label><br>
         <label for="City_village">City /village :</label>
-        <input type="text" name="City_village" id="City_village" required value="" ><br>
+        <input type="text" name="City_village" id="City_village" required value="" >
 
         <label for="State">State :</label>
-        <input type="text" name="State" id="State" required value="" ><br>
-
+        <select name="State" id="State"  required>
+                <option value="">Not selected</option>
+                <option value="Maharashtra" id="State">Maharashtra</option>
+        </select>
+<br>
         <label for="District">District :</label>
-        <input type="text" name="District" id="District" required value="" ><br>
+        <!-- <input type="text" name="District" id="District" required value="" > -->
+        <select name="District" id="District"  required>
+                <option value="">Not selected</option>
+                <option value="Sangli" id="District">Sangli</option>
+                <option value="Kolhapur" id="District">Kolhapur</option>
+                <option value="Solapur" id="District">Solapur</option>
+                <option value="Satara" id="District">Satara</option>
+        </select>
 
         <label for="Pin">Pin :</label>
         <input type="text" name="Pin" id="Pin" required value="" ><br>
 
         <label for="Mobile">Mobile :</label>
-        <input type="text" name="Mobile" id="Mobile" required value="" ><br>
+        <input type="text" name="Mobile" id="Mobile" required value="" >
 
         <label for="Email">Email :</label>
         <input type="email" name="Email" id="Email" required value="" ><br>
 
         <label for="Password">Password :</label>
-        <input type="password" name="Password" id="Password" required="" value="" ><br>
+        <input type="password" name="Password" id="Password" required="" value="" >
 
         <label for="Repassword">Repassword :</label>
         <input type="password" name="Repassword" id="Repassword" required="" value=""><br>
-
-        
-        <button type="submit" name="submit">Ragister</button>
-    </form>
     
-    
-    <a href="Customer_login.php">Customer Login</a>
-    
+        <a href="index.php" class="cancle">
+            <button type="button" name="cancle" id="cancle">Cancle</button>
+        </a>  
+        <button type="submit" name="submit" id="register">Register</button>
+      
+    </form>   
+    </div>
 </body>
 </html>

@@ -1,5 +1,5 @@
 <?php 
-require 'config.php';
+require 'connection/config.php';
 if(isset($_POST["submit"])){
     $Email=$_POST["Email"];
     $Password=$_POST["Password"];
@@ -10,24 +10,21 @@ if(isset($_POST["submit"])){
             $_SESSION["login"]=true;
             $_SESSION["Customer_id"]=$row["Customer_id"];
             header("Location: Customer_Dashboard.php");
-
+            
         }
         else{
             echo
-    "<script> alert('Wrong Password...!');</script>";
+    "<script> alert('Wrong Password.');</script>";
         }
-
     }
     else{
         echo
-    "<script> alert('User not Ragistard');</script>";
+    "<script> alert('User not Ragistard.');</script>";
     }
 }
-
-
 ?>
 
-
+<!-- Customer login Start -->
 
 <!DOCTYPE html>
 <html lang="en">
@@ -35,21 +32,34 @@ if(isset($_POST["submit"])){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Customer Login</title>
+    <link rel="stylesheet" href="./Css/Style.css">
 </head>
 <body>
-    <h1>Customer Login</h1>
-    <p>Dont have an Account yet? <span><a href="Customer_ragistration.php">Sign Up</a></span></p>
-    <form class="" action="" method="post" autocomplete="off">
-        <label for="Email">Email :</label>
-        <input type="text" name="Email" id="Email" required value="" ><br>
-
-        
-        <label for="Password">Password :</label>
-        <input type="password" name="Password" id="Password" required value="" ><br>
-        
-        <button type="submit" name="submit">Login</button>
-        
-    </form>
+    <div class="login-background">
+    <div class="login-container">
+        <div class="login-form">
+        <div class="login-card">
+        <h1>Customer Login</h1>
+        <p>Don't have an Account yet? <span><a href="Customer_ragistration.php">Sign Up</a></span></p>
     
+        <form class="" action="" method="post" autocomplete="off"> 
+        <label for="Email">Email Id </label><br>
+        <input type="text" name="Email" id="Email" required value="" ><br>
+        
+        <label for="Password">Password </label><br>
+        <input type="password" name="Password" id="Password" required value="" ><br>
+        <br><div class="login-btn">
+
+            <button type="submit" name="submit">Login</button>
+        </div>        
+        
+         </form>
+        </div>
+        </div>
+        <div class="login-image">
+            <img src="./Images/login_page_img2.png" alt="login image">
+        </div>
+    </div>
+    </div>   
 </body>
 </html>
