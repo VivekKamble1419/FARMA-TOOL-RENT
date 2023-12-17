@@ -6,7 +6,8 @@
     <title>Document</title>
 </head>
 <body>
-    <a href="Customer_login.php">Customer Login</a>
+<a href="Customer_login.php">Customer Login</a><br>
+    <a href="Seller_login.php">Seller Login</a>
     
 </body>
 </html>
