@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Farma Tools Rent</title>
-    <link rel="stylesheet" href="Css/Index.css">
+    <link rel="stylesheet" href="Css/Index1.css">
 </head>
 <body>
     <section class="section1">
@@ -35,6 +35,7 @@
                 </div>
             </div>
     </section>
+
     <section class="section2">
         <div class="s-2">
             <div class="s-2-1">
@@ -47,8 +48,61 @@
             </div>
         </div>
     </section>
+
     <section class="section3">
-        <h1>hii</h1>
+        <div class="s-3-1">
+            <h1>Here You can give Your Equipment's on  Rent</h1>
+        </div>
+
+        <div class="equipments">
+        <div class="card">
+        <img src="Images/equipment_1.jpg" alt="Image 1">
+        <div class="card-content">
+            <h3>Card 1</h3>
+            <p>This is some text for Card 1.</p>
+        </div>
+    </div>
+
+    <div class="card">
+        <img src="Images/equipment_2.jpg" alt="Image 2">
+        <div class="card-content">
+            <h3>Card 2</h3>
+            <p>This is some text for Card 2.</p>
+        </div>
+    </div>
+
+    <div class="card">
+        <img src="Images/equipment_3.png" alt="Image 3">
+        <div class="card-content">
+            <h3>Card 3</h3>
+            <p>This is some text for Card 3.</p>
+        </div>
+    </div>
+    <div class="card">
+        <img src="Images/equipment_4.jpg" alt="Image 3">
+        <div class="card-content">
+            <h3>Card 3</h3>
+            <p>This is some text for Card 3.</p>
+        </div>
+    </div>
+        </div>
+        <div class="slider-container">
+
+        <div class="slider">
+            <div class="slides">
+                <?php
+                // Replace "Images/" with the path to your image folder
+                $imageFolder = "Slider_images/";
+                $Images = glob($imageFolder . "*.{jpg,jpeg,png,gif}", GLOB_BRACE);
+
+                foreach ($Images as $Image) {
+                    echo "<div class='slide'><img src='$Image' alt='Image'></div>";
+                }
+                ?>
+                
+            </div>
+        </div>
+        </div>
     </section>
 
     
