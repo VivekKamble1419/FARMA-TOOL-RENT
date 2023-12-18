@@ -35,7 +35,7 @@ if (isset($_POST["submit"])) {
         </div>
         <div class="navbar">
                 <div class="menu" id="menu">
-                    <a href="#">About Us</a>
+                    <a href="#footer">About Us</a>
                     <a href="Customer_login.php">Customer Login</a>
                     <a href="Seller_login.php">Seller Login</a>
                     <!-- <a href="#">Create Account</a> -->
@@ -60,8 +60,8 @@ if (isset($_POST["submit"])) {
     <section class="section2">
         <div class="s-2">
             <div class="s-2-1">
-                <div class="s-2-1-1"><a href="#"><h1>Rent Your Farming Equipments</h1></a></div>
-                <div class="s-2-1-2"><a href="#"><h1>Buy on Rent</h1></a></div>
+                <div class="s-2-1-1"><a href="Seller_login.php"><h1>Rent Your Farming Equipments</h1></a></div>
+                <div class="s-2-1-2"><a href="Customer_login.php"><h1>Buy on Rent</h1></a></div>
             </div>
             <div class="s-2-2">
                 
@@ -79,31 +79,31 @@ if (isset($_POST["submit"])) {
         <div class="card">
         <img src="Images/equipment_1.jpg" alt="Image 1">
         <div class="card-content">
-            <h3>Card 1</h3>
-            <p>This is some text for Card 1.</p>
+            <h3>Sprayer</h3>
+            <p>Sprayer on rent available</p>
         </div>
         </div>
 
         <div class="card">
         <img src="Images/equipment_2.jpg" alt="Image 2">
         <div class="card-content">
-            <h3>Card 2</h3>
-            <p>This is some text for Card 2.</p>
+            <h3>Rotaver</h3>
+            <p>Rotaver is available </p>
         </div>
         </div>
 
         <div class="card">
         <img src="Images/equipment_3.png" alt="Image 3">
         <div class="card-content">
-            <h3>Card 3</h3>
-            <p>This is some text for Card 3.</p>
+            <h3>Tractor</h3>
+            <p>Tractor on rent available</p>
         </div>
         </div>
         <div class="card">
         <img src="Images/equipment_4.jpg" alt="Image 3">
         <div class="card-content">
-            <h3>Card 3</h3>
-            <p>This is some text for Card 3.</p>
+            <h3>Rotaver</h3>
+            <p>Rotaver is available</p>
         </div>
         </div>
         </div>
@@ -134,45 +134,46 @@ if (isset($_POST["submit"])) {
     <div class="slider1">
         <!-- Customer Feedback Slides -->
     <div class="slide1">
-	<img src="Images/login_page_img2.png" alt="Customer 2">
+	<img src="Images/feedback1.jpg" alt="Customer 2">
     <h4>Name: Vivek Kamble</h4>
             <div class="stars">
                 <span>&#9733;</span>
                 <span>&#9733;</span>
                 <span>&#9733;</span>
+                <span>&#9733;</span>
                 <span>&#9734;</span>
-                <span>&#9734;</span>
+            </div>
+            
+            <p class="message">
+"User-friendly interface, seamless navigation, informative content, visually appealing design, efficient services, reliable information, responsive layout, excellent customer support."</p>
+            <!-- Content of Slide 1 -->
+        </div>
+        <div class="slide1">
+	<img src="Images/feedback2.jpg" alt="Customer 2">
+    <h4>Name: Chaitanya Kashid</h4>
+            <div class="stars">
+                <span>&#9733;</span>
+                <span>&#9733;</span>
+                <span>&#9733;</span>
+                <span>&#9733;</span>
+                <span>&#9733;</span>
             </div>
             
             <p class="message">Outstanding quality and prompt delivery.</p>
             <!-- Content of Slide 1 -->
         </div>
         <div class="slide1">
-	<img src="Images/login_page_img2.png" alt="Customer 2">
-    <h4>Name: Vivek Kamble</h4>
+	<img src="Images/feedback3.jpg" alt="Customer 2">
+    <h4>Name: Shubham</h4>
             <div class="stars">
                 <span>&#9733;</span>
                 <span>&#9733;</span>
                 <span>&#9733;</span>
-                <span>&#9734;</span>
-                <span>&#9734;</span>
+                <span>&#9733;</span>
+                <span>&#9733;</span>
             </div>
             
-            <p class="message">Outstanding quality and prompt delivery.</p>
-            <!-- Content of Slide 1 -->
-        </div>
-        <div class="slide1">
-	<img src="Images/login_page_img2.png" alt="Customer 2">
-    <h4>Name: Vivek Kamble</h4>
-            <div class="stars">
-                <span>&#9733;</span>
-                <span>&#9733;</span>
-                <span>&#9733;</span>
-                <span>&#9734;</span>
-                <span>&#9734;</span>
-            </div>
-            
-            <p class="message">Outstanding quality and prompt delivery.</p>
+            <p class="message">Responsive customer support, timely responses.</p>
             <!-- Content of Slide 1 -->
         </div>
 
@@ -184,11 +185,12 @@ if (isset($_POST["submit"])) {
 </div>
                
     </section>
-    <footer class="footer">
+    <footer class="footer" id="footer">
 
         <div class="about-us">
-            <h2>About Us</h2>
-            <p>Your about us content goes here. Provide a brief description of your company or organization.</p>
+            <h2>About Us</h2><br><br>
+            <p>Welcome to our e-commerce haven! At Farma Tools Rent, we're committed to revolutionizing your shopping experience. Our vast range of quality products, seamless navigation, and secure transactions ensure you find what you need effortlessly. With a focus on customer satisfaction, we strive to make online shopping a delight. Join us on this exciting journey! <br><br>
+        Contact US <br><br> Name : Vivek Kamble <br>Mobile: 7709629488<br><br> Name: Chaitanya Kashid <br> Mobile: 8208951770<br><br>Email: farmatoolsrent@gmail.com<br><br>Follow us on <br><a href="#">Instagram</a>     <a href="#">Tweeter</a>    <a href="#">Facebook</a>       </p>
         </div>
        
 
