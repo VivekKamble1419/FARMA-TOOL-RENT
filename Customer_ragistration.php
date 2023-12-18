@@ -22,6 +22,10 @@ else{
         mysqli_query($conn,$query);
         echo
         "<script> alert('Registration Sussefully');</script>";
+         // Redirect to a new page after displaying the alert
+        echo "<script>window.location.href='index.php';</script>";
+        exit();
+
     }
     else{
         echo
