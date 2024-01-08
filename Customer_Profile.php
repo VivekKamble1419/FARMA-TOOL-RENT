@@ -4,6 +4,7 @@ if(!empty($_SESSION['Customer_id'])){
     $Customer_id=$_SESSION['Customer_id'];
    $result= mysqli_query($conn, "SELECT * FROM c_signup WHERE Customer_id=$Customer_id");
    $row= mysqli_fetch_assoc($result);
+  
 }
 else{
     header("Location: Customer_Dashboard.php");
@@ -27,7 +28,7 @@ else{
         <div>
             <nav >
                 <ul>
-                    <li class="seller-wel">Welcome <?php echo $row["Full_name"]; ?></li>                 
+                    <li class="seller-wel">Welcome  <?php echo $row["Full_name"]; ?></li>                 
                 <div class="icons">
                     <li><a href="Customer_Dashboard.php" id="customer-login">Home</a></li> 
                     <li><a href="logout.php" id="customer-login">Logout</a></li> 
