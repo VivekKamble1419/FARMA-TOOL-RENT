@@ -29,12 +29,12 @@ else{
         .card img {
             margin: 5%;
             width: 70%;
-             height: 60%;
+             height: 57%;
         }
         .card {
     margin: auto;
     width: 25%;
-    height: 350px;  
+    height: 360px;  
     margin: 30px;
     padding-bottom: 1%;
     display: inline-block;
@@ -45,6 +45,10 @@ else{
         .frame-container {
             height: 70vh;
             display: flex;
+        }
+        .Customer{
+            padding-top: 22vh;
+
         }
 
         .frame-left {
@@ -98,7 +102,7 @@ else{
     
         $query = "SELECT sell_product.*, s_signup.Full_name,City_village,State,District,Pin
           FROM sell_product
-          INNER JOIN s_signup ON sell_product.Seller_id = s_signup.Seller_id";
+          INNER JOIN s_signup ON sell_product.Seller_id = s_signup.Seller_id ORDER BY sell_product.Seller_id DESC" ;
         $result = $conn->query($query);
         if ($result->num_rows > 0) {
             // Output data of each row
