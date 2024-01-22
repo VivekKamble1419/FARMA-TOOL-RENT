@@ -117,6 +117,7 @@ h1 .Rent{
 
 .dropdown-content a:hover {
     background-color: #ddd;
+    color: #fafafa;
 }
 
 .dropdown:hover .dropdown-content {
@@ -219,7 +220,9 @@ h1 .Rent{
     padding: 20px;
 
 }
-
+.card-content p{
+    color: black;
+}
 /*Image Slider */
 .slider-container {
    margin: auto;
@@ -440,7 +443,7 @@ height: auto;
 }
 
 .card p {
-    color: #cf0000;
+    color: #000000;
 }
 
 .button {

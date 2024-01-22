@@ -94,15 +94,15 @@ button{
     font-size: 16px;
 }
 #cancle{
-    background-color: #FA5A45;
+    background-color: #f01c00;
 }
 #cancle:hover{
-    background-color: #f33820;
+    background-color: #ff1e00;
     color: white;
 
 }
 #register{
-    background-color: #AAFA45;
+    background-color: #0ae40a;
 }
 #register:hover{
     background-color: #83ee00;

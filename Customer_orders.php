@@ -8,8 +8,6 @@ if(!empty($_SESSION['Customer_id'])){
 else{
     header("Location: Customer_login.php");
 }
-
-
 ?>
 
 
@@ -74,6 +72,7 @@ else{
         <div class="navbar">
             <h1>Welcome  <?php echo $row["Full_name"];?></h1>
                 <div class="menu" id="menu">
+                    <a href="Customer_Dashboard.php">Home</a>
                     <a href="Customer_orders.php">Orders</a>
                     <a href="Customer_Profile.php">Profile</a>
                     <a href="logout.php">Logout</a>
@@ -86,51 +85,8 @@ else{
                 </div>
             </div>
     </section>
-
-
-    <div class="frame-container Customer">
-        <div class="frame-left D-l">
-            <!-- Your left frame content here -->
-            <h1>Select Location</h1>
-            <a href="#"><button>Sangli</button><br></a>
-            <a href="#"><button>Kolhapur</button><br></a>
-            <a href="#"><button>Solapur</button><br></a>
-            <a href="#"><button>Satara</button><br></a>
-        </div>
- 
-    <div class="frame-right D-r">
-           
-        <?php
+     
     
-        $query = "SELECT sell_product.*, s_signup.Full_name,City_village,State,District,Pin
-          FROM sell_product
-          INNER JOIN s_signup ON sell_product.Seller_id = s_signup.Seller_id ORDER BY sell_product.Seller_id DESC" ;
-        $result = $conn->query($query);
-        if ($result->num_rows > 0) {
-            // Output data of each row
-            while ($row = $result->fetch_assoc()) {
-                ?>
-                <div class="card">
-                    <img src="<?php echo $row['Product_Image']; ?>" alt="Card Image">
-                    <div class="card-content">
-                        <p><?php echo $row['Product_name']; ?></p>
-                        <p>Seller: <?php echo $row['Full_name']; ?></p>
-                        <p><?php echo $row['State'], ",",$row['District'],"," ,$row['Pin']; ?></p>
-                        <a href="Product_more_details.php?product_id=<?php echo urlencode($row['product_id']); ?>" class="button">More details</a>
-
-                    </div>
-                </div>
-                <?php
-            }
-        } else {
-            echo "0 results";
-        }
-
-        // Close connection
-        $conn->close();
-        ?>
-        </div>
-    </div>
 
     <script src="JavaScript/Index.js"></script>
     

@@ -46,7 +46,7 @@ if (isset($_POST["submit"])) {
             echo "<script>alert('Image size is too large');</script>";
         } else {
             $newImageName = uniqid() . '.' . $imageExtension;
-            $uploadPath = 'upload/' . $newImageName;  // Initialize $uploadPath
+            $uploadPath = 'Product_images/' . $newImageName;  // Initialize $uploadPath
 
             move_uploaded_file($tmpName, $uploadPath);
 
