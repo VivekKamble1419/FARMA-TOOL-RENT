@@ -21,6 +21,10 @@ if (!empty($_SESSION['Customer_id'])) {
     <link rel="stylesheet" href="Css/Index2.css">
 </head>
 <style>
+    body{
+        background-color: #fafafa;
+
+    }
     .Productpic_info {
         padding-inline: 30px;
         display: flex;
@@ -30,7 +34,7 @@ if (!empty($_SESSION['Customer_id'])) {
         gap: 8rem;
     }
     .section-2{
-        padding-top: 11%;
+        padding-top: 10%;
     }
     .section-2 p{
         font-size: 18px;
@@ -45,19 +49,23 @@ if (!empty($_SESSION['Customer_id'])) {
         border: solid 1.5px;
     }
     .product_info {
-        line-height: 2;
+        line-height: 1.6;
     }
     .product_info button {
         margin: auto;
-        margin-top: 30px;
-        margin-left: 220px;
+        margin-top: 20px;
+        margin-left: 100px;
         font-size: 20px;
         color: white;
         cursor: pointer;
         border: none;
-        padding: 20px 70px;
+        padding: 20px 60px;
         border-radius: 5px;
         background-color: rgb(179, 17, 212);
+    }
+    .product_info button:hover {
+        opacity: .9;
+        color: black;
     }
     .product_condiction h3 {
         text-align: center;
@@ -139,6 +147,17 @@ if (!empty($_SESSION['Customer_id'])) {
         z-index: 1;
         backdrop-filter: blur(30px); /* Apply blur effect to the background */
     }
+    .product_info{
+        background-color: #f5f3f2;
+        padding: 50px;
+        border-radius: 12% 5% 12% 5%;
+    }
+    .product_info:hover {
+        background-color: white;
+
+    box-shadow: 2px 2px 2px 2px black;
+    padding: 50px;
+}
     @keyframes spin {
         0% { transform: rotate(0deg); }
         100% { transform: rotate(360deg); }
@@ -248,13 +267,14 @@ if (!empty($_SESSION['Customer_id'])) {
                             <p>Rent Per Day: <?php echo $row['rent']; ?></p>
                             <p id="payableAmount">Total Payable Amount: <?php echo $row['rent']; ?></p>
                             <!-- Add data attributes to store relevant information -->
-                            <button id="orderButton" 
-    data-product-name="<?php echo $row['Product_name']; ?>"
-    data-seller-id="<?php echo $row['Seller_id']; ?>"
-    data-location="<?php echo $row['State'] . ',' . $row['District'] . ',' . $row['Pin']; ?>"
-    data-rent="<?php echo $row['rent']; ?>"
-    data-product-id="<?php echo $row['product_id']; ?>"
->Order now</button>
+                            <button
+                            id="orderButton"
+                            data-product-name="<?php echo $row['Product_name']; ?>"
+                            data-seller-id="<?php echo $row['Seller_id']; ?>"
+                            data-location="<?php echo $row['State'] . ',' . $row['District'] . ',' . $row['Pin']; ?>"
+                            data-rent="<?php echo $row['rent']; ?>"
+                            data-product-id="<?php echo $row['product_id']; ?>"
+                        >Order now</button>
 
 
 
@@ -321,7 +341,6 @@ function confirmOrder() {
         </div>
     `;
 }
-
 function proceedWithOrder() {
     // Retrieve the order details
     const orderFor = document.getElementById("orderFor").value;
@@ -334,23 +353,24 @@ function proceedWithOrder() {
     const Seller_id = orderButton.getAttribute("data-seller-id");
     const Location = orderButton.getAttribute("data-location");
 
+    // Show the "Order Placed" message
+    confirmationPopup.innerHTML = "<div class='loading'></div>";
+
     // Simulate order placement by delaying the process
     setTimeout(function () {
-        // Show the "Order Placed" message
-        confirmationPopup.innerHTML = "<div class='loading'></div>";
-
         // Save order data to the database
         saveOrderData(Product_name, Seller_id, Location, orderFor, orderQuantity, payableAmount);
 
         // Delay for a short duration before redirecting to the dashboard page
         setTimeout(function () {
-        confirmationPopup.innerHTML = "<div class='loading-2'></div>";
+            confirmationPopup.innerHTML = "<div class='loading-2'></div>";
 
             // Redirect to the dashboard page after hiding the "Order Placed" message
             window.location.href = "Customer_Dashboard.php";
-        }, 3000);
-    }, 5000);
+        },2000);
+    }, 2000);
 }
+
 function saveOrderData(Product_name, Seller_id, Location, order_for, order_quantity, payableAmount) {
     // Retrieve additional data attributes
     const product_id = orderButton.getAttribute("data-product-id");
@@ -377,37 +397,38 @@ function saveOrderData(Product_name, Seller_id, Location, order_for, order_quant
     xhr.send(data);
 }
 
-
 document.addEventListener("DOMContentLoaded", function () {
-    const orderForSelect = document.getElementById("orderFor");
-    const orderQuantitySelect = document.getElementById("orderQuantity");
-    const payableAmountElement = document.getElementById("payableAmount");
-    const orderButton = document.getElementById("orderButton");
-    const confirmationPopup = document.getElementById("confirmationPopup");
-    const overlay = document.getElementById("overlay");
-    const confirmOrderButton = document.getElementById("confirmOrder");
-    const cancelOrderButton = document.getElementById("cancelOrder");
+        const orderForSelect = document.getElementById("orderFor");
+        const orderQuantitySelect = document.getElementById("orderQuantity");
+        const payableAmountElement = document.getElementById("payableAmount");
+        const confirmationPopup = document.getElementById("confirmationPopup");
+        const overlay = document.getElementById("overlay");
+        const confirmOrderButton = document.getElementById("confirmOrder");
+        const cancelOrderButton = document.getElementById("cancelOrder");
 
-    function updatePayableAmount() {
-        const rent = <?php echo $row['rent']; ?>;
-        const orderForValue = parseInt(orderForSelect.value);
-        const orderQuantityValue = parseInt(orderQuantitySelect.value);
-        const payableAmount = rent * orderForValue * orderQuantityValue;
+        // Define orderButton outside the updatePayableAmount function
+        const orderButton = document.getElementById("orderButton");
 
-        payableAmountElement.textContent = "Total Payable Amount: " + payableAmount;
-    }
+        function updatePayableAmount() {
+            const rent = <?php echo $row['rent']; ?>;
+            const orderForValue = parseInt(orderForSelect.value);
+            const orderQuantityValue = parseInt(orderQuantitySelect.value);
+            const payableAmount = rent * orderForValue * orderQuantityValue;
 
-    orderForSelect.addEventListener("change", updatePayableAmount);
-    orderQuantitySelect.addEventListener("change", updatePayableAmount);
-    orderButton.addEventListener("click", showConfirmationPopup);
-    confirmOrderButton.addEventListener("click", confirmOrder);
-    cancelOrderButton.addEventListener("click", hideConfirmationPopup);
+            payableAmountElement.textContent = "Total Payable Amount: " + payableAmount;
+        }
 
-    orderForSelect.addEventListener("change", updatePayableAmount);
-    orderQuantitySelect.addEventListener("change", updatePayableAmount);
+        orderForSelect.addEventListener("change", updatePayableAmount);
+        orderQuantitySelect.addEventListener("change", updatePayableAmount);
+        orderButton.addEventListener("click", showConfirmationPopup);
+        confirmOrderButton.addEventListener("click", confirmOrder);
+        cancelOrderButton.addEventListener("click", hideConfirmationPopup);
 
-    updatePayableAmount(); // Initial update to set the default payable amount
-});
+        orderForSelect.addEventListener("change", updatePayableAmount);
+        orderQuantitySelect.addEventListener("change", updatePayableAmount);
+
+        updatePayableAmount(); // Initial update to set the default payable amount
+    });
                     </script>
                     <?php
                 }

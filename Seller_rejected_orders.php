@@ -139,6 +139,8 @@ if (isset($_POST['reject_order']) && isset($_POST['product_id'])) {
         <div class="navbar">
             <h1>Welcome  <?php echo $row["Full_name"];?></h1>
                 <div class="menu" id="menu">
+                <a href="Seller_Dashboard.php">Home</a>
+
                     <a href="#">Products</a>
                     <a href="Seller_Profile.php">Profile</a>
                     <a href="logout.php">Logout</a>
@@ -161,14 +163,14 @@ if (isset($_POST['reject_order']) && isset($_POST['product_id'])) {
     </div>
 
     <div class="frame-right D-r">
-        <h1>You have Following Orders:</h1>
+        <h1>Your Rejected Orders:</h1>
         <?php
         $query = "SELECT orders.*, Sell_product.Product_id, Sell_product.Product_Image, c_signup.*
         FROM orders
         INNER JOIN Sell_product ON orders.Product_id = Sell_product.Product_id
         INNER JOIN c_signup ON orders.Customer_id = c_signup.Customer_id
         WHERE orders.Seller_id = $Seller_id
-        AND orders.order_status NOT IN ('Rejected', 'Accepted') -- Exclude rejected and accepted orders
+        AND orders.order_status NOT IN ('', 'Accepted') -- Exclude rejected and accepted orders
         ORDER BY orders.Seller_id DESC";
         $result = $conn->query($query);
         if ($result->num_rows > 0) {
@@ -196,6 +198,8 @@ if (isset($_POST['reject_order']) && isset($_POST['product_id'])) {
                         <p>Rent Period: <?php echo $row['order_for']; ?> Day's</p>
                         <p>Rent : <?php echo $row['rent']; ?></p>
                         <p>Total Rent: <?php echo $row['total_payable']; ?></p>
+                        <p>Order status: <?php echo $row['order_status']; ?></p>
+                        
                         <!-- Add more customer information as needed -->
                         <!-- Add this inside the while loop where you display seller orders -->
                         <form action="" method="post">

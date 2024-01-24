@@ -84,9 +84,9 @@ else{
         <input type="email" name="Email" id="Email" required value="" ><br>
 
         <label for="Password">Password :</label>
-        <input type="password" name="Password" id="Password" required="" value="" >
+        <input type="password" name="Password" id="Password" required="" value="" ><br>
 
-        <label for="Repassword">Repassword :</label>
+        <label for="Repassword">Confirm Password :</label>
         <input type="password" name="Repassword" id="Repassword" required="" value=""><br>
     
         <a href="index.php" class="cancle">

@@ -114,6 +114,8 @@ if (isset($_POST["submit"])) {
             background-color: #4caf50;
             color: white;
             padding: 10px;
+            font-size: 18px;
+            margin-left: 100px;
             border: none;
             border-radius: 4px;
             cursor: pointer;
@@ -174,12 +176,12 @@ if (isset($_POST["submit"])) {
        <label for="product_discription">Product discription:</label>
         <input type="textarea" name="product_discription" id="product_discription"  required></input>
 
-        
-        <button type="submit" name="submit" value="Upload">Add Item</button>
-        
+        <br>
         <a href="Seller_Dashboard.php" class="cancle">
             <button type="button" name="cancle" id="cancle">Cancle</button>
         </a> 
+        <button type="submit" name="submit" value="Upload">Add Item</button>
+        
 
 
     </form>
