@@ -179,6 +179,46 @@ if (isset($_POST["submit"])) {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }
+/* Add these styles to your existing styles... */
+
+/* New styles for highlight section */
+
+
+.highlight-symbol {
+    font-size: 24px; /* Set the font size of the symbols */
+    color: #007BFF; /* Set the color of the symbols */
+    margin-bottom: 10px; /* Add some space below the symbols */
+}
+
+.highlight-section h2 {
+    text-align: left;
+    color: green;
+    font-size: 18px; /* Set the font size of the points */
+    margin-bottom: 20px; /* Add some space below each point */
+    line-height: 1.5; /* Adjust line height for better readability */
+}
+/* New styles for highlight section */
+.highlight-section {
+    background: url('./Images/highlight.jpg') center/cover fixed; /* Replace 'your-background-image.jpg' with the path to your background image */
+    padding: 50px; /* Adjust padding as needed */
+    text-align: center;
+    color: #fff; /* Set text color to white or any color that contrasts well with the background */
+    position: relative; /* Add this for proper positioning of the content */
+}
+
+.highlight-content {
+    max-width: 800px; /* Set the maximum width of the content */
+    margin: 0 auto; /* Center the content */
+    background-color: rgba(255, 255, 255, 0.7); /* Set the background color with transparency (adjust the last value for transparency) */
+    padding: 20px; /* Adjust padding as needed */
+    border-radius: 10px; /* Add rounded corners for a modern look */
+}
+.highlight-content h1{
+    color: black;
+
+}
+/* End of new styles for highlight section */
+
 
     </style>
 </head>
@@ -277,6 +317,21 @@ if (isset($_POST["submit"])) {
         </div>
         
     </section>
+    <section class="highlight-section animated-section">
+    <div class="highlight-content">
+        <h1>Highlights</h1><br><br>
+        <div> <h2><span   class="highlight-symbol">  &#10003; </span>  Digital Farmer-2-Farmer agri-equipment rentals and customized agri-information</h2>
+        </div>
+        <div> <h2><span   class="highlight-symbol">  &#10003; </span> Free of cost platform - ZERO charge to farmers and renters  </h2>
+        </div>
+        <div> <h2><span   class="highlight-symbol">  &#10003; </span>Enhanced income and productivity for farmers with increased utilization of idle assets </h2>
+        </div>
+
+        
+    </div>
+</section>
+
+
     <section class="slider-section animated-section">
     <div class="slider-info">
         <h1>Here you,</h1>
