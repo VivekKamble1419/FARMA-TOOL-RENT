@@ -368,10 +368,6 @@ img {
     color: #fff;
 }
 
-.about-us,
-.feedback-form {
-    flex: 0 0 48%;
-}
 
 h2 {
     color: #f39c12;

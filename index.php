@@ -124,33 +124,55 @@ if (isset($_POST["submit"])) {
 }
 
 .slider-info p {
-    font-family: cursive;
-    font-size: 22px;
-    line-height: 2;
+    font-size: 20px;
+    font-weight: 300;
+    line-height: 1.7;
     color: black; /* Set text color */
 }
 
 .slider-info h1 {
     font-size: 28px;
-    color: #007BFF; /* Set a bold color for the heading */
+    color: black; /* Set a bold color for the heading */
     margin-bottom: 20px; /* Add some space below the heading */
 }
 
-/* Adjust the font size, line height, and colors as needed */
-
-/* End of additional styles for slider info */
-
-/* Add these styles to your existing styles... */
-
-/* New styles for slider info hover effect */
-
-
-.slider-info:hover h1,
-.slider-info:hover p {
-    color: #333; /* Adjust the text color for better visibility on the blurred background */
+/* Additional styles for slider section */
+.slider-section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 50px;
 }
 
-/* End of additional styles for slider info hover effect */
+.slider-info,
+.slider-container {
+    flex: 1;
+}
+
+.slider-info {
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+}
+
+.slider-container {
+    margin-left: 20px;
+    overflow: hidden;
+    position: relative;
+}
+
+.slider {
+    display: flex;
+    transition: transform 0.9s ease-in-out;
+}
+
+.slide {
+    flex: 0 0 100%;
+}
+
+
+
 
         /* Loading animation styles */
 #loading {
@@ -217,6 +239,247 @@ if (isset($_POST["submit"])) {
     color: black;
 
 }
+/* Add this to your CSS */
+/* Add this to your CSS */
+@keyframes fadeInFooter {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.footer {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    background-color: #333;
+    color: #fff;
+    flex-wrap: wrap;
+    animation: fadeInFooter 1s ease-in-out; /* Apply the fade-in animation */
+}
+
+.footer-column {
+    flex: 0 0 30%; /* Adjust the width as needed */
+    box-sizing: border-box;
+    padding: 20px;
+    margin-bottom: 20px; /* Add some margin between columns */
+
+}
+
+.footer-social-media {
+    flex: 100%;
+    margin-top: 20px;
+    text-align: center;
+}
+/* Add this to your existing styles... */
+
+.social-icon {
+    color: #fff;
+    text-decoration: none;
+    margin: 0 10px;
+    position: relative;
+}
+
+.social-icon:hover {
+    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #007BFF;
+}
+
+.social-icon:hover::before {
+    opacity: 1;
+}
+
+
+.social-icon {
+    color: #fff;
+    text-decoration: none;
+    margin: 0 10px;
+}
+
+.footer-copyright {
+    flex: 100%;
+    text-align: center;
+    margin-top: 20px;
+}
+
+
+.footer-column.site-map h2 {
+    margin-bottom: 20px; /* Add some space below the heading */
+}
+
+.footer-column.site-map ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-column.site-map ul li {
+    margin-bottom: 10px;
+}
+
+.footer-column.site-map a {
+    color: white; /* Set link color */
+    text-decoration: none;
+    transition: color 0.3s ease-in-out; /* Add a smooth transition effect for color changes */
+}
+
+.footer-column.site-map a:hover {
+    color: #e74c3c; /* Change the color on hover */
+}
+/* Add this to your existing styles... */
+
+/* Footer hover underline animation */
+.footer-column h2 {
+    position: relative;
+    cursor: pointer;
+    margin-bottom: 30px;
+    transition: color 0.3s ease-in-out; /* Add a smooth transition effect for color changes */
+}
+
+.footer-column h2:hover {
+    color: #e74c3c; /* Change the color on hover */
+}
+
+.footer-column h2::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: #e74c3c; /* Set the underline color */
+    transition: width 0.3s ease-in-out; /* Add a smooth transition effect for width changes */
+}
+
+.footer-column h2:hover::before {
+    width: 100%;
+}
+/* Add this to your existing styles... */
+
+/* Chat button styles */
+.chat-button {
+  position: fixed;
+  bottom: 10px;
+  right: 20px;
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  z-index: 1001; /* Place the chat button above the other elements */
+}
+
+.chat-button img{
+    height: 140px;
+    width: 140px;
+}
+
+/* Chat popup styles */
+.chat-popup {
+    margin-bottom: 80px;
+  display: none;
+  position: fixed;
+  bottom: 80px;
+  right: 20px;
+  width: 400px;
+  height: 450px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  z-index: 1000; /* Place the chat popup below the chat button */
+}
+
+.chat-popup-content {
+  padding: 10px;
+  text-align: center;
+}
+
+/* Show/hide animation for chat popup */
+.chat-popup.show {
+  display: block;
+  animation: fadeIn 0.5s ease-in-out;
+}
+.chat-popup-content h1 {
+  background-color: #ccc;
+  font-family: cursive;
+  padding: 10px;
+  text-align: center;
+  position: sticky;
+  top: 0; /* Stick to the top */
+  z-index: 1; /* Ensure it's above other elements */
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Add this to your existing styles... */
+
+/* Chat message styles */
+.chat-message {
+  padding: 10px;
+  margin: 10px;
+  border-radius: 5px;
+  max-width: 70%;
+}
+
+.bot {
+  background-color: #007BFF;
+  color: #fff;
+  align-self: flex-start;
+}
+
+.user {
+  background-color: #eee;
+  color: #333;
+  align-self: flex-end;
+}
+
+/* Add this to your existing styles... */
+
+/* Chat input and messages styles */
+.chat-popup-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.chat-messages {
+  flex-grow: 1;
+  overflow-y: auto;
+}
+
+.chat-input {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.chat-input input {
+  flex-grow: 1;
+  padding: 8px;
+  margin-right: 5px;
+  
+}
+
+.chat-input button {
+  padding: 8px 15px;
+  background-color: #007BFF;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* Ensure the chat messages scroll to the latest message */
+#chatMessages {
+  overflow-y: auto;
+}
+
 /* End of new styles for highlight section */
 
 
@@ -243,7 +506,7 @@ if (isset($_POST["submit"])) {
         </div>
         <div class="navbar">
                 <div class="menu" id="menu">
-                    <a href="#footer">About Us</a>
+                    <a href="About_us.php">About Us</a>
                     <a href="Customer_login.php">Customer Login</a>
                     <a href="Seller_login.php">Seller Login</a>
                     <!-- <a href="#">Create Account</a> -->
@@ -417,36 +680,106 @@ if (isset($_POST["submit"])) {
 </div>
                
     </section>
-    <footer class="footer" id="footer">
-
-        <div class="about-us">
-            <h2>About Us</h2><br><br>
-            <p>Welcome to our e-commerce haven! At Farma Tools Rent, we're committed to revolutionizing your shopping experience. Our vast range of quality products, seamless navigation, and secure transactions ensure you find what you need effortlessly. With a focus on customer satisfaction, we strive to make online shopping a delight. Join us on this exciting journey! <br><br>
-        Contact US <br><br> Name : Vivek Kamble <br>Mobile: 7709629488<br><br> Name: Chaitanya Kashid <br> Mobile: 8208951770<br><br>Email: farmatoolsrent@gmail.com<br><br>Follow us on <br><a href="#">Instagram</a>     <a href="#">Tweeter</a>    <a href="#">Facebook</a>       </p>
-        </div>
-       
-
-        <div class="feedback-form">
-            <h2>Feedback Form</h2>
-            <form id="feedbackForm" action="index.php" method="post">
-                <label for="name">Name:</label>
-                <input type="text" id="name" name="name" required>
-
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" required>
-
-                <label for="message">Message:</label>
-                <textarea id="message" name="message" rows="4" required></textarea>
-
-               <button type="submit" name="submit">Submit Feedback</button>
-            </form>
-        </div>
-    </footer>
-    
 
 
 
+<div id="chatButton" class="chat-button" onclick="toggleChatPopup()">
+  <img src="./Images/chatbot2.gif" alt="Chat Icon">
+</div>
+<div id="chatPopup" class="chat-popup">
+   
+  <div class="chat-popup-content">
 
+    <!-- Add your chat content here -->
+    <div class="chat-messages" id="chatMessages">
+    <h1 style="background-color: #ccc; font-family: cursive; padding: 10px; text-align:center;">Farm Tools Rent</h1>
+    <div class="chat-message bot">Hello! I'm Farma Tools Rent Chatbot. How can I assist you today?</div>
+      <div class="chat-message bot">Hello! I'm Farma Tools Rent Chatbot. How can I assist you today?</div>
+      <div class="chat-message user">Hi there! I'm interested in renting farming equipment.</div>
+      <div class="chat-message bot">Great! We have a variety of equipment available. What specific equipment are you looking for?</div>
+      <div class="chat-message user">I need a tractor for plowing my fields.</div>
+      <div class="chat-message bot">Sure, we have tractors available for rent. Could you please provide your location so that I can find the nearest options for you?</div>
+      
+      <!-- Add more chat messages as needed -->
+    </div>
+    <div class="chat-input">
+      <input type="text" id="userMessage" placeholder="Type your message...">
+      <button>Send</button>
+    </div>
+  </div>
+</div>
+
+
+
+
+   <!-- Add this to your HTML structure -->
+<footer class="footer" id="footer">
+    <div class="footer-column contact-info">
+        <h2>Contact Information</h2>
+        <p>
+            Name: Vivek Kamble <br>
+            Mobile: 7709629488 <br>
+            <br>
+            Name: Chaitanya Kashid <br>
+            Mobile: 8208951770 <br>
+            <br>
+            Email: farmatoolsrent@gmail.com
+        </p>
+    </div>
+
+    <div class="footer-column site-map">
+        <h2>Site Map</h2>
+        <ul>
+            <li><a href="About_us.php">About Us</a></li>
+            <li><a href="Customer_login.php">Customer Login</a></li>
+            <li><a href="Seller_login.php">Seller Login</a></li>
+            <li><a href="Customer_ragistration.php">Customer Signup</a></li>
+            <li><a href="Seller_ragistration.php">Seller Signup</a></li>
+            <!-- Add more links as needed -->
+        </ul>
+    </div>
+
+    <div class="footer-column feedback-form">
+        <h2>Feedback Form</h2>
+        <form id="feedbackForm" action="index.php" method="post">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="message">Message:</label>
+            <textarea id="message" name="message" rows="4" required></textarea>
+
+            <button type="submit" name="submit">Submit Feedback</button>
+        </form>
+    </div>
+
+    <div class="footer-social-media">
+       <!-- Update your social media links in the footer... -->
+
+<a href="#" class="social-icon" >WhatsApp</a>
+<a href="#" class="social-icon" >Facebook</a>
+<a href="#" class="social-icon" >Twitter</a>
+<a href="#" class="social-icon" >Instagram</a>
+<a href="#" class="social-icon" >YouTube</a>
+
+    </div>
+
+    <div class="footer-copyright">
+        <p>&copy; 2024 Farma Tools Rent. All rights reserved.</p>
+    </div>
+</footer>
+
+
+<script>
+    // Add this to your existing JavaScript...
+function toggleChatPopup() {
+  var chatPopup = document.getElementById('chatPopup');
+  chatPopup.classList.toggle('show');
+}
+
+</script>
 
     <script src="JavaScript/Index.js"></script>
 

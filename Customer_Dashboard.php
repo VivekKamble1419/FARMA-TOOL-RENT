@@ -59,7 +59,7 @@ $result = $conn->query($query);
                 text-align: center;
 }
 #show-all button{
-    background-color: gray;
+    background-color: #e8de6d;
 }
         .frame-container {
             height: 70vh;
