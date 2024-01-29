@@ -26,6 +26,10 @@ if (isset($_POST["submit"])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Farma Tools Rent</title>
     <link rel="stylesheet" href="Css/Index.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0">
+
+    <link rel="stylesheet" href="Css/chat_bot.css">
+    
     <style>
         /* Existing styles... */
 
@@ -355,59 +359,8 @@ if (isset($_POST["submit"])) {
 .footer-column h2:hover::before {
     width: 100%;
 }
-/* Add this to your existing styles... */
 
-/* Chat button styles */
-.chat-button {
-  position: fixed;
-  bottom: 10px;
-  right: 20px;
-  background-color: transparent;
-  border: none;
-  padding: 0;
-  cursor: pointer;
-  z-index: 1001; /* Place the chat button above the other elements */
-}
 
-.chat-button img{
-    height: 140px;
-    width: 140px;
-}
-
-/* Chat popup styles */
-.chat-popup {
-    margin-bottom: 80px;
-  display: none;
-  position: fixed;
-  bottom: 80px;
-  right: 20px;
-  width: 400px;
-  height: 450px;
-  background-color: #fff;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  z-index: 1000; /* Place the chat popup below the chat button */
-}
-
-.chat-popup-content {
-  padding: 10px;
-  text-align: center;
-}
-
-/* Show/hide animation for chat popup */
-.chat-popup.show {
-  display: block;
-  animation: fadeIn 0.5s ease-in-out;
-}
-.chat-popup-content h1 {
-  background-color: #ccc;
-  font-family: cursive;
-  padding: 10px;
-  text-align: center;
-  position: sticky;
-  top: 0; /* Stick to the top */
-  z-index: 1; /* Ensure it's above other elements */
-}
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -417,70 +370,11 @@ if (isset($_POST["submit"])) {
   }
 }
 
-/* Add this to your existing styles... */
-
-/* Chat message styles */
-.chat-message {
-  padding: 10px;
-  margin: 10px;
-  border-radius: 5px;
-  max-width: 70%;
-}
-
-.bot {
-  background-color: #007BFF;
-  color: #fff;
-  align-self: flex-start;
-}
-
-.user {
-  background-color: #eee;
-  color: #333;
-  align-self: flex-end;
-}
-
-/* Add this to your existing styles... */
-
-/* Chat input and messages styles */
-.chat-popup-content {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-}
-
-.chat-messages {
-  flex-grow: 1;
-  overflow-y: auto;
-}
-
-.chat-input {
-  display: flex;
-  align-items: center;
-  margin-top: 10px;
-}
-
-.chat-input input {
-  flex-grow: 1;
-  padding: 8px;
-  margin-right: 5px;
-  
-}
-
-.chat-input button {
-  padding: 8px 15px;
-  background-color: #007BFF;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-/* Ensure the chat messages scroll to the latest message */
-#chatMessages {
-  overflow-y: auto;
-}
 
 /* End of new styles for highlight section */
+
+
+
 
 
     </style>
@@ -615,9 +509,7 @@ if (isset($_POST["submit"])) {
                 ?>
             </div>
         </div>
-        <!-- Navigation Arrows -->
-        <!-- <div class="prev" onclick="changeSlide(-1)">❮</div>
-        <div class="next" onclick="changeSlide(1)">❯</div> -->
+    
     </div>
 </section>
     <section class="section4 animated-section">
@@ -683,33 +575,29 @@ if (isset($_POST["submit"])) {
 
 
 
-<div id="chatButton" class="chat-button" onclick="toggleChatPopup()">
-  <img src="./Images/chatbot2.gif" alt="Chat Icon">
-</div>
-<div id="chatPopup" class="chat-popup">
-   
-  <div class="chat-popup-content">
+<button class="chatbot-toggler">
+        <span class="material-symbols-outlined">mode_comment</span>
+        <span class="material-symbols-outlined">close</span>
+    </button>
+<div class="chatbot">
+    <header>
+        <h2>Tell us any problem</h2>
+        <span class="close-btn material-symbols-outlined">close</span>
 
-    <!-- Add your chat content here -->
-    <div class="chat-messages" id="chatMessages">
-    <h1 style="background-color: #ccc; font-family: cursive; padding: 10px; text-align:center;">Farm Tools Rent</h1>
-    <div class="chat-message bot">Hello! I'm Farma Tools Rent Chatbot. How can I assist you today?</div>
-      <div class="chat-message bot">Hello! I'm Farma Tools Rent Chatbot. How can I assist you today?</div>
-      <div class="chat-message user">Hi there! I'm interested in renting farming equipment.</div>
-      <div class="chat-message bot">Great! We have a variety of equipment available. What specific equipment are you looking for?</div>
-      <div class="chat-message user">I need a tractor for plowing my fields.</div>
-      <div class="chat-message bot">Sure, we have tractors available for rent. Could you please provide your location so that I can find the nearest options for you?</div>
-      
-      <!-- Add more chat messages as needed -->
-    </div>
+    </header>
+    <ul class="chatbox">
+        <li class="chat incoming">
+            <span class="material-symbols-outlined">Smart_toy</span>
+            <p>chat bot Here, 👋<br> How Can I help You today?</p>
+        </li>
+       
+    </ul>
+
     <div class="chat-input">
-      <input type="text" id="userMessage" placeholder="Type your message...">
-      <button>Send</button>
+        <textarea placeholder="Enter a message....." required></textarea>
+        <span id="send-btn" class="material-symbols-outlined ">send</span>
     </div>
-  </div>
-</div>
-
-
+</div>   
 
 
    <!-- Add this to your HTML structure -->
@@ -774,10 +662,105 @@ if (isset($_POST["submit"])) {
 
 <script>
     // Add this to your existing JavaScript...
-function toggleChatPopup() {
-  var chatPopup = document.getElementById('chatPopup');
-  chatPopup.classList.toggle('show');
+
+//all code is based on open ai
+
+const chatInput= document.querySelector(".chat-input textarea");
+const sendChatBtn= document.querySelector(".chat-input span");
+const chatbox= document.querySelector(".chatbox");
+const chatbotToggler= document.querySelector(".chatbot-toggler");
+const chatbotcloseBtn= document.querySelector(".close-btn");
+
+
+
+
+let userMessage;
+const API_KEY ="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";
+const inputInHeight= chatInput.scrollHeight;
+    //reflacts user message to outgoing box
+const createChatLi = (message, className) => {
+    const chatli = document.createElement("li");
+    chatli.classList.add("chat", className);
+    let chatContent = className === "outgoing" ? `<p></p>` : `<span class="material-symbols-outlined">Smart_toy</span><p></p>`;
+    chatli.innerHTML = chatContent;
+    chatli.querySelector("p").textContent=message;
+    return chatli;
+  }
+
+  const genrateResponce = (incomingChatli) => {
+    const API_URL = "https://api.openai.com/v1/chat/completions";
+    const messageElement = incomingChatli.querySelector("p");
+
+    const requestOptions = {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${API_KEY}`
+        },
+        body: JSON.stringify({
+            model: "gpt-3.5-turbo",
+            messages: [{ role: "user", content: userMessage }]
+        })
+    };
+
+    // send post request to api
+    fetch(API_URL, requestOptions)
+        .then(res => {
+            if (!res.ok) {
+                throw new Error(`HTTP error! Status: ${res.status}`);
+            }
+            return res.json();
+        })
+        .then(data => {
+            messageElement.textContent = data.choices[0].message.content;
+        })
+        .catch(error => {
+            messageElement.classList.add("error");
+            messageElement.textContent = "Oops! Something went wrong. Please try again.";
+            console.error(error);
+        })
+        .finally(() => chatbox.scrollTo(0, chatbox.scrollHeight));
+};
+
+
+
+const handlechat=()=>{
+    userMessage = chatInput.value.trim();
+    if(!userMessage) return;
+    chatInput.value ="";
+    chatInput.style.height=`${inputInHeight}px`
+
+
+    //reflacts user message to chat box
+    chatbox.appendChild(createChatLi(userMessage,"outgoing"));
+    chatbox.scrollTo(0,chatbox.scrollHeight);
+    // console.log(userMessage);
+
+    setTimeout(()=>{
+        const incomingChatli=createChatLi("Iam is Thinking...","incoming")
+    chatbox.appendChild(incomingChatli);
+    chatbox.scrollTo(0,chatbox.scrollHeight);
+
+    genrateResponce(incomingChatli);
+        
+    },600);
 }
+
+chatInput.addEventListener("input", ()=>{
+    chatInput.style.height=`${inputInHeight}px`
+    chatInput.style.height=`${chatInput.scrollHeight}px`
+});
+
+chatInput.addEventListener("keydown", (e)=>{
+    if(e.key === "Enter" && ! e.shiftKey && window.innerWidth > 800){
+        e.preventDefault();
+        handlechat();
+    }
+});
+sendChatBtn.addEventListener("click",handlechat);
+chatbotToggler.addEventListener("click",()=>document.body.classList.toggle("show-chatbot"));
+chatbotcloseBtn.addEventListener("click",()=>document.body.classList.remove("show-chatbot"));
+
 
 </script>
 
