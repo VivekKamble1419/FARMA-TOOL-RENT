@@ -335,6 +335,7 @@ function confirmOrder() {
         <p>Order Quantity: ${orderQuantity}</p>
         <p>Total Payable Amount: ${payableAmount}</p>
 
+        
         <div class="btn">
             <button id="cancelOrder" onclick="hideConfirmationPopup()">Cancel</button>
             <button id="confirmOrder" onclick="proceedWithOrder()">Confirm Order</button>
@@ -371,7 +372,7 @@ function proceedWithOrder() {
     }, 2000);
 }
 
-function saveOrderData(Product_name, Seller_id, Location, order_for, order_quantity, payableAmount) {
+function saveOrderData(Product_name, Seller_id, Location, order_for, order_quantity, payableAmount,Placed) {
     // Retrieve additional data attributes
     const product_id = orderButton.getAttribute("data-product-id");
     const rent = orderButton.getAttribute("data-rent");

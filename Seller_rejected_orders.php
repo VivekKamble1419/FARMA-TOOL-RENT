@@ -9,27 +9,28 @@ if(!empty($_SESSION['Seller_id'])){
 else{
     header("Location: Seller_login.php");
 }
-if (isset($_POST['reject_order']) && isset($_POST['product_id'])) {
-    $product_id = $_POST['product_id'];
+if (isset($_POST['reject_order']) && isset($_POST['id'])) {
+    $order_id = $_POST['id'];
 
     // Update order status to 'Rejected'
-    $updateQuery = "UPDATE orders SET order_status = 'Rejected' WHERE product_id = $product_id";
+    $updateQuery = "UPDATE orders SET order_status = 'Rejected' WHERE id = $order_id";
     mysqli_query($conn, $updateQuery);
-    
+
     // Redirect back to the seller dashboard
     header("Location: seller_dashboard.php");
     exit();
-} elseif (isset($_POST['accept_order']) && isset($_POST['product_id'])) {
-    $product_id = $_POST['product_id'];
+} elseif (isset($_POST['accept_order']) && isset($_POST['id'])) {
+    $order_id = $_POST['id'];
 
     // Update order status to 'Accepted'
-    $updateQuery = "UPDATE orders SET order_status = 'Accepted' WHERE product_id = $product_id";
+    $updateQuery = "UPDATE orders SET order_status = 'Accepted' WHERE id = $order_id";
     mysqli_query($conn, $updateQuery);
 
     // Redirect back to the seller dashboard
     header("Location: seller_dashboard.php");
     exit();
 }
+
 
 
 ?>
@@ -141,7 +142,6 @@ if (isset($_POST['reject_order']) && isset($_POST['product_id'])) {
                 <div class="menu" id="menu">
                 <a href="Seller_Dashboard.php">Home</a>
 
-                    <a href="#">Products</a>
                     <a href="Seller_Profile.php">Profile</a>
                     <a href="logout.php">Logout</a>
                
@@ -170,8 +170,9 @@ if (isset($_POST['reject_order']) && isset($_POST['product_id'])) {
         INNER JOIN Sell_product ON orders.Product_id = Sell_product.Product_id
         INNER JOIN c_signup ON orders.Customer_id = c_signup.Customer_id
         WHERE orders.Seller_id = $Seller_id
-        AND orders.order_status NOT IN ('', 'Accepted') -- Exclude rejected and accepted orders
+        AND orders.order_status = 'Rejected' -- Only include rejected orders
         ORDER BY orders.Seller_id DESC";
+
         $result = $conn->query($query);
         if ($result->num_rows > 0) {
             // Output data of each row
@@ -200,16 +201,15 @@ if (isset($_POST['reject_order']) && isset($_POST['product_id'])) {
                         <p>Total Rent: <?php echo $row['total_payable']; ?></p>
                         <p>Order status: <?php echo $row['order_status']; ?></p>
                         
-                        <!-- Add more customer information as needed -->
-                        <!-- Add this inside the while loop where you display seller orders -->
-                        <form action="" method="post">
-                            <input type="hidden" name="product_id" value="<?php echo $row['product_id']; ?>">
-                            <input type="hidden" name="product_id" value="<?php echo $row['product_id']; ?>"> <!-- Add the order_id as a hidden input -->
-                            <div class="buttons">
-                                <button type="submit" name="reject_order">Reject Order</button>
-                                <button type="submit" name="accept_order">Accept Order</button>
-                            </div>
-                        </form>
+                       <!-- Inside the while loop where you display seller orders -->
+                         <form action="" method="post">
+                                 <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
+                                <!-- Add the order_id as a hidden input -->
+                                <div class="buttons">
+                                    <button type="submit" name="accept_order">Accept Order</button>
+                                </div>
+                            </form>
+
 
 
                     </div>

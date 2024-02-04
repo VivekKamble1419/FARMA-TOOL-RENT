@@ -1,15 +1,14 @@
 <?php 
 require 'connection/config.php';
 
-if (!empty($_SESSION['Customer_id'])) {
-    $Customer_id = $_SESSION['Customer_id'];
-    $result = mysqli_query($conn, "SELECT * FROM c_signup WHERE Customer_id = $Customer_id");
+if (!empty($_SESSION['Seller_id'])) {
+    $Seller_id = $_SESSION['Seller_id'];
+    $result = mysqli_query($conn, "SELECT * FROM s_signup WHERE Seller_id = $Seller_id");
     $row = mysqli_fetch_assoc($result);
-    $ordersResult = mysqli_query($conn, "SELECT * FROM orders WHERE Customer_id = $Customer_id ORDER BY order_date_time DESC");
+    $ordersResult = mysqli_query($conn, "SELECT * FROM sell_product WHERE Seller_id = $Seller_id ");
 
-} 
-else {
-    header("Location: Customer_login.php");
+} else {
+    header("Location: Seller_login.php");
 }
 ?>
 
@@ -18,7 +17,7 @@ else {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Customer Dashboard</title>
+    <title>Seller Products</title>
     <link rel="stylesheet" href="Css/Index2.css">
 </head>
 <style>
@@ -99,8 +98,9 @@ else {
         <div class="navbar">
             <h1>Welcome  <?php echo $row["Full_name"];?></h1>
             <div class="menu" id="menu">
-                <a href="Customer_Dashboard.php">Home</a>
-                <a href="Customer_Profile.php">Profile</a>
+                <a href="Seller_Dashboard.php">Home</a>
+                <a href="Seller_Profile.php">Profile</a>
+                <a href="Seller_all_orders.php">All Orders</a>
                 <a href="logout.php">Logout</a>
             </div>
             <div class="icon" onclick="toggleMenu()">
@@ -111,12 +111,10 @@ else {
         </div>
     </section>
     <section class="section-2">
-    <h1>Your Orders</h1>
+    <h1>All Products</h1>
 
     <?php
-    // Loop through orders and display them
     while ($orderRow = mysqli_fetch_assoc($ordersResult)) {
-        // Fetch product image from sell_product table using Seller_id
         $product_id = $orderRow['product_id'];
         $imageQuery = mysqli_query($conn, "SELECT product_image FROM sell_product WHERE product_id = $product_id");
         $imageRow = mysqli_fetch_assoc($imageQuery);
@@ -126,49 +124,18 @@ else {
                 <img src="<?php echo $imageRow['product_image']; ?>" alt="Product Image">
             </div>
 
-            <div class="info1">
-                <p>Product Name: <?php echo $orderRow['Product_name']; ?></p>
-                <p>Order for: <?php echo $orderRow['order_for']; ?> Days</p>
-                <p>Order Quantity: <?php echo $orderRow['order_quantity']; ?></p>
-                <p>Place: <?php echo $orderRow['Location']; ?></p>
-                <p>Payable Amount: <?php echo $orderRow['total_payable']; ?></p>
-            </div>
+            <!-- Modify the part where you display order details -->
+                <div class="info1">
+                    <p>Product Name: <?php echo $orderRow['Product_name']; ?></p>
+                    <p>Available Quantity: <?php echo $orderRow['available_qantity']; ?></p>
+                    <p>Rent: <?php echo $orderRow['rent']; ?></p>
+                    <button class="delete-product-button" data-product-id="<?php echo $orderRow['product_id']; ?>">Delete Product</button>
+                </div>
+
 
             <!-- Modify the part where you display order details -->
 
-            <!-- Add a class to the div that contains the rejection message -->
-            <div class="place <?php echo ($orderRow['order_status'] == 'Rejected') ? 'rejected' : ''; ?>">
-            <?php
-            switch ($orderRow['order_status']) {
-        case 'Rejected':
-            echo "<p id='rejected'>Order Rejected</p><br>";
-            echo "<p class='detail'>Sorry for Inconvenience.<br> Product is Not Available Now. <br>Seller will not proceed with this order.<br>Seller will contact you soon.</p>";
-            break;
-
-        case 'Accepted':
-            echo "<p>Order Accepted</p><br>";
-            echo "<p class='detail'>Seller will contact you soon.</p>";
-            break;
-        case 'Shipped':
-            echo "<p>Order Shipped</p><br>";
-            echo "<p class='detail'>Seller will contact you soon.</p>";
-            break;
-            case 'Delivered':
-                echo "<p>Order Delivered</p><br>";
-                echo "<p class='detail'>Delivered</p>";
-                break;
-        default:
-            echo "<p>Order Placed</p><br>";
-            echo "<p class='detail'>Your Order is Placed. <br>Wait Until Seller will Accept your Order. <br>Seller will contact you soon.</p>";
-            break;
-    }
-    ?>
-                <br>
-                
-                <a href="Order_more_details.php?id=<?php echo $orderRow['id']; ?>">More Details</a>
-
-
-            </div>
+     
         </div>
     <?php
     }
@@ -177,7 +144,38 @@ else {
     }
     ?>
 </section>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.delete-product-button').on('click', function () {
+                var productId = $(this).data('product-id');
 
+                // Display a confirmation dialog
+                var confirmDelete = confirm("Are you sure you want to delete this product?");
+
+                if (confirmDelete) {
+                    // Send an AJAX request to the server for product deletion
+                    $.ajax({
+                        type: 'POST',
+                        url: 'delete_product.php',
+                        data: { productId: productId },
+                        success: function (response) {
+                            // Handle the response from the server
+                            if (response === 'success') {
+                                // Reload the page or update the UI as needed
+                                location.reload();
+                            } else {
+                                alert('Error deleting product. Please try again.');
+                            }
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            alert('AJAX error: ' + textStatus + ' - ' + errorThrown);
+                        }
+                    });
+                }
+            });
+        });
+    </script>
     <script src="JavaScript/Index.js"></script>
 </body>
 </html>

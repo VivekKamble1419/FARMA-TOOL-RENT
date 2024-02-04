@@ -119,7 +119,6 @@ else{
             <h1>Welcome  <?php echo $row["Full_name"];?></h1>
                 <div class="menu" id="menu">
                     <a href="Seller_Dashboard.php">Home</a>
-                    <a href="#">Products</a>
                     <a href="Seller_Profile.php">Profile</a>
                     <a href="logout.php">Logout</a>
                
@@ -183,10 +182,7 @@ else{
                         <form action="" method="post">
                             <input type="hidden" name="product_id" value="<?php echo $row['product_id']; ?>">
                             <input type="hidden" name="product_id" value="<?php echo $row['product_id']; ?>"> <!-- Add the order_id as a hidden input -->
-                            <div class="buttons">
-                                <button type="submit" name="reject_order">Reject Order</button>
-                                <button type="submit" name="accept_order">Accept Order</button>
-                            </div>
+                          
                         </form>
 
 
