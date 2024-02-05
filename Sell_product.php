@@ -7,7 +7,7 @@ if (isset($_POST["submit"])) {
     $rent = $_POST["rent"];
     $product_quality = $_POST["product_quality"];
     $product_discription = $_POST["product_discription"];
-
+    $Product_status=$_POST["Product_status"];
 
     // Check if the user is logged in
     if (isset($_SESSION['Seller_id'])) {
@@ -50,7 +50,7 @@ if (isset($_POST["submit"])) {
 
             move_uploaded_file($tmpName, $uploadPath);
 
-            $query = "INSERT INTO sell_product (Seller_id, Product_Image, Product_name, available_qantity, rent, product_quality, product_discription) VALUES ('$Seller_id', '$uploadPath', '$Product_name', '$available_qantity', '$rent', '$product_quality', '$product_discription')";
+            $query = "INSERT INTO sell_product (Seller_id, Product_Image,Product_status, Product_name, available_qantity, rent, product_quality, product_discription) VALUES ('$Seller_id', '$uploadPath','$Product_status', '$Product_name', '$available_qantity', '$rent', '$product_quality', '$product_discription')";
 
             mysqli_query($conn, $query);
 
@@ -173,6 +173,12 @@ if (isset($_POST["submit"])) {
                 <option value="bad " id="bad ">Bad  </option>
                 
        </select> 
+       <label for="Product_status">Product Quality :</label>
+
+       <select name='Product_status' id="Product_status" required>
+                        <option value='Display' id="Display">Display</option>
+                    </select><br>
+
        <label for="product_discription">Product discription:</label>
         <input type="textarea" name="product_discription" id="product_discription"  required></input>
 

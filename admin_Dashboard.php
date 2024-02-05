@@ -36,6 +36,19 @@ $rejectedOrdersCountQuery = "SELECT COUNT(*) as rejectedOrders FROM orders WHERE
 $rejectedOrdersCountResult = mysqli_query($conn, $rejectedOrdersCountQuery);
 $rejectedOrdersCountData = mysqli_fetch_assoc($rejectedOrdersCountResult);
 $rejectedOrders = $rejectedOrdersCountData['rejectedOrders'];
+
+// Fetch count of rejected orders
+$totalcustomersCountQuery = "SELECT COUNT(*) as totalcustomers FROM c_signup ";
+$totalcustomersCountQueryResult = mysqli_query($conn, $totalcustomersCountQuery);
+$totalcustomersCountQueryData = mysqli_fetch_assoc($totalcustomersCountQueryResult);
+$totalcustomers = $totalcustomersCountQueryData['totalcustomers'];
+
+// Fetch count of rejected orders
+$totalsellersCountQuery = "SELECT COUNT(*) as totalsellers FROM s_signup ";
+$totalsellersCountQueryResult = mysqli_query($conn, $totalsellersCountQuery);
+$totalsellersCountQueryData = mysqli_fetch_assoc($totalsellersCountQueryResult);
+$totalsellerss = $totalsellersCountQueryData['totalsellers'];
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -104,7 +117,7 @@ $rejectedOrders = $rejectedOrdersCountData['rejectedOrders'];
             flex: 1; /* Takes the remaining 70% */
             padding: 20px;
             overflow-y: auto; /* Enable vertical scrolling */
-            display: flex;
+            display: block;
             gap: 10px;
             justify-content: space-between;
             flex-wrap: wrap;
@@ -127,19 +140,27 @@ $rejectedOrders = $rejectedOrdersCountData['rejectedOrders'];
             background-color: #777;
         }
       
-        .card {
-             height: 150px;
-            width: 220px;
-            flex: 1;
-            max-width: calc(25% - 10px); /* 25% width with a 10px gap */
-            background-color: #fff;
-            padding: 10px;
-            margin-left: 20px;
-            margin-bottom: 10px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px black;
-            overflow: hidden;
-        }
+        .cards-2 {
+    display: flex;
+    gap: 20px; /* Adjust the gap between cards */
+}
+
+.card {
+    height: 180px;
+    width: 250px;
+    background-color: #fff;
+    padding: 15px;
+    margin-left: 20px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px black;
+    overflow: hidden;
+    display: flex;
+    
+    flex-direction: column;
+    justify-content: space-between;
+}
+
         .cards{
           display: flex;
         }
@@ -154,6 +175,14 @@ $rejectedOrders = $rejectedOrdersCountData['rejectedOrders'];
         }
         #card-4{
           background-color: #e55353;
+        }
+        #card-total-customers{
+            background-color: gray;
+            color: black;
+        }
+        #card-total-sellers{
+            background-color: palevioletred;
+            color: black;
         }
         canvas {
             max-width: 100%;
@@ -173,19 +202,21 @@ $rejectedOrders = $rejectedOrdersCountData['rejectedOrders'];
     </header>
 
     <nav>
-        <a href="#">Home</a>
-        <a href="#">Customers</a>
-        <a href="#">Sellers</a>
-        <a href="#">Products</a>
+    <a href="admin_Dashboard.php" style="text-decoration: none; background-color: gray; color: black;">
+            Home
+        </a>
+        <a href="admin_customers.php">Customers</a>
+        <a href="admin_seller.php">Sellers</a>
+        <a href="admin_products.php">Products</a>
 
     </nav>
 
     <section class="main">
     <div class="btns">
       <a href="#"> <button class="btn">Total Transactions</button>  </a>
-      <a href="#"> <button class="btn">Total Orders</button>       </a>
-      <a href="#"> <button class="btn">User Accounts</button>     </a>
-      <a href="#">  <button class="btn">Feedback</button>        </a>
+      <a href="admin_Total_orders.php"> <button class="btn">Total Orders</button>       </a>
+      <a href="admin_user_accounts.php"> <button class="btn">User Accounts</button>     </a>
+      <a href="admin_feedback.php">  <button class="btn">Feedback</button>        </a>
     <a href="logout.php"> <button class="btn">Logout</button>          </a>
     </div>
         <div class="info">
@@ -208,9 +239,18 @@ $rejectedOrders = $rejectedOrdersCountData['rejectedOrders'];
             <p class="running-effect" id="runningEffect4"><?php echo $rejectedOrders; ?></p>
         </div>
           </div>
-          <div class="graph">
-        
-          </div>
+          <br><br>
+         <div class="cards-2">
+                <div class="card" id="card-total-customers">
+                    <h2>Total Customers</h2>
+                    <p class="running-effect" id="runningEffect5"><?php echo $totalcustomers; ?></p>
+                </div>
+                <div class="card" id="card-total-sellers">
+                    <h2>Total Sellers</h2>
+                    <p class="running-effect" id="runningEffect6"><?php echo $totalsellerss; ?></p>
+                </div>
+        </div>
+          
         </div>
     </section>
     <script>
@@ -220,7 +260,9 @@ $rejectedOrders = $rejectedOrdersCountData['rejectedOrders'];
                 <?php echo $totalOrders; ?>,
                 <?php echo $completedOrders; ?>,
                 <?php echo $pendingOrders; ?>,
-                <?php echo $rejectedOrders; ?>
+                <?php echo $rejectedOrders; ?>,
+                <?php echo $totalcustomers; ?>,
+                <?php echo $totalsellerss; ?>,
             ];
 
             for (let i = 0; i < targets.length; i++) {

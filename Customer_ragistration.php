@@ -10,7 +10,7 @@ if(isset($_POST["submit"])){
  $Email = $_POST["Email"];   
  $Password = $_POST["Password"];   
  $Repassword = $_POST["Repassword"];   
-
+ $Account=$_POST["Account_status"];
 $duplicate = mysqli_query($conn, "SELECT * FROM c_signup WHERE email= '$Email' ");
 if(mysqli_num_rows($duplicate) > 0){
     echo
@@ -18,7 +18,8 @@ if(mysqli_num_rows($duplicate) > 0){
 }
 else{
     if($Password == $Repassword){
-        $query = "INSERT INTO c_signup VALUES('','$Full_name','$City_village','$State','$District','$Pin','$Mobile','$Email','$Password','$Repassword')";
+        $query = "INSERT INTO c_signup VALUES('','$Account','$Full_name','$City_village','$State','$District','$Pin','$Mobile','$Email','$Password','$Repassword')";
+
         mysqli_query($conn,$query);
         echo
         "<script> alert('Registration Sussefully');</script>";
@@ -77,6 +78,12 @@ else{
         <label for="Pin">Pin :</label>
         <input type="text" name="Pin" id="Pin" required value="" ><br>
 
+        <label for="Account_status">Account :</label>
+        <select name="Account_status" id="District"  required>
+                <option value="Active">Active</option>
+                
+        </select><br>   
+        
         <label for="Mobile">Mobile :</label>
         <input type="text" name="Mobile" id="Mobile" required value="" >
 
