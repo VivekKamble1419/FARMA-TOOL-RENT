@@ -10,9 +10,11 @@ if (!empty($_SESSION["id"])) {
     header("Location: admin_login.php");
 }
 
-// Fetch orders from the database
-$orderQuery = "SELECT * FROM orders";
+// Fetch orders from the database with order_status = 'Delivered'
+$orderQuery = "SELECT * FROM orders WHERE order_status = 'Delivered'";
 $orderResult = mysqli_query($conn, $orderQuery);
+// Initialize total payable amount variable
+$totalPayableAmount = 0;
 ?>
 
 <!DOCTYPE html>
@@ -167,9 +169,9 @@ $orderResult = mysqli_query($conn, $orderQuery);
 
     <section class="main">
     <div class="btns">
-      <a href="admin_Total_Transaction.php"> <button class="btn">Total Transactions</button>  </a>
-      <a href="#" style="text-decoration: none;">
-    <button class="btn" style="background-color: gray; color: black;">Total Orders</button>
+      <a href="#"  style="text-decoration: none;"> <button class="btn"  style="background-color: gray; color: black;">Total Transactions</button>  </a>
+      <a href="admin_Total_orders.php">
+    <button class="btn">Total Orders</button>
 </a>
       <a href="admin_user_accounts.php"> <button class="btn">User Accounts</button>     </a>
       <a href="admin_feedback.php"><button class="btn">Feedback</button>
@@ -177,7 +179,7 @@ $orderResult = mysqli_query($conn, $orderQuery);
     <a href="logout.php"> <button class="btn">Logout</button>          </a>
     </div>
     <div class="info">
-        <h2>Total Orders</h2>
+    <h2>Total Orders (Delivered)</h2>
         <a href="#" style="text-decoration: none;">
                     <button style="background-color: #4CAF50; /* Green */
                    border: none;
@@ -209,6 +211,7 @@ $orderResult = mysqli_query($conn, $orderQuery);
                         <th>Order Date and Time</th>
                         <th>Rent</th>
                         <th>Payable Amount</th>
+                        
                     </tr>
                 </thead>
                 <tbody>
@@ -230,6 +233,13 @@ $orderResult = mysqli_query($conn, $orderQuery);
                         echo "<td>{$orderRow['order_date_time']}</td>";
                         echo "<td>{$orderRow['rent']}</td>";
                         echo "<td style='font-weight: bold;'>{$orderRow['total_payable']}</td>";
+                        echo "</tr>";
+           
+                        $totalPayableAmount += floatval($orderRow['total_payable']);
+
+                        echo "<tr>";
+                        echo "<td colspan='12' style='text-align: right; font-weight: bold;'>Total Payable Amount:</td>";
+                        echo "<td style='font-weight: bold;'>{$totalPayableAmount}</td>";
                         echo "</tr>";
                         $counter++; // Increment counter
                     }

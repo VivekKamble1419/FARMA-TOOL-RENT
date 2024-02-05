@@ -5,22 +5,23 @@ if(isset($_POST["submit"])){
     $Password=$_POST["Password"];
     $result= mysqli_query($conn, "SELECT * FROM s_signup WHERE EMAIL ='$Email'");
     $row = mysqli_fetch_array($result);
+    
     if(mysqli_num_rows($result)>0){
-        if($Password == $row["Password"]){
-            $_SESSION["login"]=true;
-            $_SESSION["Seller_id"]=$row["Seller_id"];
-            header("Location: Seller_Dashboard.php");
-            
+        if($row["Account_status"] == 'Active'){ // Assuming 'Status' is the column for account status
+            if($Password == $row["Password"]){
+                $_SESSION["login"]=true;
+                $_SESSION["Seller_id"]=$row["Seller_id"];
+                header("Location: Seller_Dashboard.php");
+            } else {
+                echo "<script> alert('Wrong Password.');</script>";
+            }
+        } else {
+            echo "<script> alert('Your account is blocked due to suspicious activity. Please contact support for assistance.');</script>";
         }
-        else{
-            echo
-    "<script> alert('Wrong Password.');</script>";
-        }
+    } else {
+        echo "<script> alert('User not Registered.');</script>";
     }
-    else{
-        echo
-    "<script> alert('Seller not Ragistard.');</script>";
-    }
+
 }
 ?>
 
@@ -33,6 +34,9 @@ if(isset($_POST["submit"])){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Seller Login</title>
+    
+    <link rel="shortcut icon" href="./Images/fab.jpg" />
+
     <link rel="stylesheet" href="./Css/Style.css">
     <style>
                 @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');

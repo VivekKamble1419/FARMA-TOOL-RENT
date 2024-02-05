@@ -20,7 +20,7 @@ if (!empty($_SESSION["id"])) {
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Admin</title>
-    <link rel="shortcut icon" href="images/favicon.png" />
+    <link rel="shortcut icon" href="./Images/fab.jpg" />
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -167,7 +167,7 @@ label {
 
     <section class="main">
     <div class="btns">
-      <a href="#"> <button class="btn">Total Transactions</button>  </a>
+      <a href="admin_Total_Transaction.php"> <button class="btn">Total Transactions</button>  </a>
       <a href="admin_Total_orders.php" >
     <button class="btn" >Total Orders</button>
 </a>

@@ -18,6 +18,8 @@ if (!empty($_SESSION['Customer_id'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Customer Dashboard</title>
+    <link rel="shortcut icon" href="./Images/fab.jpg" />
+
     <link rel="stylesheet" href="Css/Index2.css">
 </head>
 <style>

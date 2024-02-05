@@ -56,7 +56,7 @@ $totalsellerss = $totalsellersCountQueryData['totalsellers'];
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Admin</title>
-    <link rel="shortcut icon" href="images/favicon.png" />
+    <link rel="shortcut icon" href="./Images/fab.jpg" />
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -193,7 +193,17 @@ $totalsellerss = $totalsellersCountQueryData['totalsellers'];
             font-weight: bold;
             color: white;
         }
-        
+        .graph{
+            margin: auto;
+            margin-top: 50px;
+            width: 70%;
+        }
+        .Pie-chart{
+            display: inline-block;
+            margin-top: 80px;
+            margin-left: 50px;
+            width: 30%;
+        }
     </style>
 </head>
 <body>
@@ -213,7 +223,7 @@ $totalsellerss = $totalsellersCountQueryData['totalsellers'];
 
     <section class="main">
     <div class="btns">
-      <a href="#"> <button class="btn">Total Transactions</button>  </a>
+      <a href="admin_Total_Transaction.php"> <button class="btn">Total Transactions</button>  </a>
       <a href="admin_Total_orders.php"> <button class="btn">Total Orders</button>       </a>
       <a href="admin_user_accounts.php"> <button class="btn">User Accounts</button>     </a>
       <a href="admin_feedback.php">  <button class="btn">Feedback</button>        </a>
@@ -251,32 +261,121 @@ $totalsellerss = $totalsellersCountQueryData['totalsellers'];
                 </div>
         </div>
           
+        <section class="graph">
+            <h3>Database Summary</h3>
+            <canvas id="dashboardChart"></canvas>
+        </section>
+        <section class="Pie-chart">
+            <h3>Number of Sellers </h3>
+            <canvas id="sellersPieChart"></canvas>
+        </section>
+        <section class="Pie-chart">
+            <h3>Number of Customers</h3>
+            <canvas id="customersPieChart"></canvas>
+        </section>
+
         </div>
     </section>
-    <script>
-        // Running effect for all cards
-        document.addEventListener('DOMContentLoaded', function() {
-            const targets = [
-                <?php echo $totalOrders; ?>,
-                <?php echo $completedOrders; ?>,
-                <?php echo $pendingOrders; ?>,
-                <?php echo $rejectedOrders; ?>,
-                <?php echo $totalcustomers; ?>,
-                <?php echo $totalsellerss; ?>,
-            ];
+    
 
-            for (let i = 0; i < targets.length; i++) {
-                const runningEffectElement = document.getElementById('runningEffect' + (i + 1));
-                const targetNumber = targets[i];
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-                for (let j = 1; j <= targetNumber; j++) {
-                    setTimeout(() => {
-                        runningEffectElement.textContent = j;
-                    }, j * 200);
+<!-- Your existing scripts -->
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const targets = [
+            <?php echo $totalOrders; ?>,
+            <?php echo $completedOrders; ?>,
+            <?php echo $pendingOrders; ?>,
+            <?php echo $rejectedOrders; ?>,
+            <?php echo $totalcustomers; ?>,
+            <?php echo $totalsellerss; ?>,
+        ];
+
+        for (let i = 0; i < targets.length; i++) {
+            const runningEffectElement = document.getElementById('runningEffect' + (i + 1));
+            const targetNumber = targets[i];
+
+            for (let j = 1; j <= targetNumber; j++) {
+                setTimeout(() => {
+                    runningEffectElement.textContent = j;
+                }, j * 200);
+            }
+        }
+    });
+
+    document.addEventListener('DOMContentLoaded', function() {
+        var ctx = document.getElementById('dashboardChart').getContext('2d');
+
+        var data = {
+            labels: ['Total Orders', 'Completed Orders', 'Pending Orders', 'Cancelled Orders', 'Total Customers', 'Total Sellers'],
+            datasets: [{
+                label: 'Statistics',
+                data: [
+                    <?php echo $totalOrders; ?>,
+                    <?php echo $completedOrders; ?>,
+                    <?php echo $pendingOrders; ?>,
+                    <?php echo $rejectedOrders; ?>,
+                    <?php echo $totalcustomers; ?>,
+                    <?php echo $totalsellerss; ?>,
+                ],
+                backgroundColor: [
+                    '#321fdb',
+                    '#3399ff',
+                    '#f9b115',
+                    '#e55353',
+                    'gray',
+                    'palevioletred',
+                ],
+            }]
+        };
+
+        var options = {
+            scales: {
+                y: {
+                    beginAtZero: true
                 }
             }
+        };
+
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: data,
+            options: options
         });
-    </script>
+        // Sellers and Customers data
+        const sellersData = <?php echo json_encode($totalsellerss); ?>;
+        const customersData = <?php echo json_encode($totalcustomers); ?>;
+
+        // Sellers pie chart
+        var sellersCtx = document.getElementById('sellersPieChart').getContext('2d');
+        var sellersChart = new Chart(sellersCtx, {
+            type: 'pie',
+            data: {
+                labels: ['Sellers', 'Remaining'],
+                datasets: [{
+                    data: [sellersData, Math.max(0, 100 - sellersData)],
+                    backgroundColor: ['#FF6384', '#36A2EB'],
+                }]
+            },
+        });
+
+        // Customers pie chart
+        var customersCtx = document.getElementById('customersPieChart').getContext('2d');
+        var customersChart = new Chart(customersCtx, {
+            type: 'pie',
+            data: {
+                labels: ['Customers', 'Remaining'],
+                datasets: [{
+                    data: [customersData, Math.max(0, 100 - customersData)],
+                    backgroundColor: ['#FF6384', '#36A2EB'],
+                }]
+            },
+        });
+    });
+</script>
+
 </body>
 </html>
 

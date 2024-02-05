@@ -18,6 +18,8 @@ if (!empty($_SESSION['Seller_id'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Seller Products</title>
+    <link rel="shortcut icon" href="./Images/fab.jpg" />
+
     <link rel="stylesheet" href="Css/Index2.css">
 </head>
 <style>
@@ -38,6 +40,12 @@ if (!empty($_SESSION['Seller_id'])) {
     .image1 img{
         width: 80%;
         height: 250px;
+        transition: filter 0.5s, opacity 0.5s; /* Add a transition for smooth changes */
+
+    }
+    .image1.hidden-order img {
+        filter: blur(5px); /* Set blur value for hidden orders */
+        opacity: .9;
     }
     .image1 {
         width: 100%;
@@ -45,7 +53,7 @@ if (!empty($_SESSION['Seller_id'])) {
         align-items: center;
         text-align: center;
     }
-    .info1{
+    .info1 {
         width: 100%;
         margin: auto;
         justify-content: left;
@@ -53,6 +61,19 @@ if (!empty($_SESSION['Seller_id'])) {
         font-size: 20px;
         font-weight: 600;
     }
+    .info1 h4 {
+    z-index: 900;
+    text-align: center;
+    color: red; /* Style the h4 text */
+    animation: blink 1s infinite; /* Apply blink animation */
+}
+
+@keyframes blink {
+    50% {
+        opacity: 0; /* Set opacity to 0 at 50% of the animation duration */
+    }
+}
+
     .place{
         width: 100%;
         margin: auto;
@@ -87,8 +108,19 @@ if (!empty($_SESSION['Seller_id'])) {
 .place.rejected .detail {
     color: orange; /* Set the color for the detail message within rejected orders */
 }
+.hidden-order {
+    pointer-events: none; /* Disable pointer events for hidden orders */
+}
 
-
+.status-text {
+    color: red; /* Style the status text for hidden orders */
+}
+.image1.blurred img {
+        filter: blur(1px); /* Set blur value for hidden orders */
+    }
+.orders.hidden-order {
+        /* background-color:    #FAA0A0   ; */
+    }
 </style>
 <body>
     <section class="section1">
@@ -119,24 +151,22 @@ if (!empty($_SESSION['Seller_id'])) {
         $imageQuery = mysqli_query($conn, "SELECT product_image FROM sell_product WHERE product_id = $product_id");
         $imageRow = mysqli_fetch_assoc($imageQuery);
     ?>
-        <div class="orders">
-            <div class="image1">
+    <div class="orders <?php echo $orderRow['Product_status'] === 'Hide' ? 'hidden-order' : ''; ?>">
+    <div class="image1 <?php echo $orderRow['Product_status'] === 'Hide' ? 'hidden-order' : ''; ?>">
                 <img src="<?php echo $imageRow['product_image']; ?>" alt="Product Image">
             </div>
 
-            <!-- Modify the part where you display order details -->
-                <div class="info1">
-                    <p>Product Name: <?php echo $orderRow['Product_name']; ?></p>
-                    <p>Available Quantity: <?php echo $orderRow['available_qantity']; ?></p>
-                    <p>Rent: <?php echo $orderRow['rent']; ?></p>
-                    <button class="delete-product-button" data-product-id="<?php echo $orderRow['product_id']; ?>">Delete Product</button>
-                </div>
-
-
-            <!-- Modify the part where you display order details -->
-
-     
+        <div class="info1">
+            <?php if ($orderRow['Product_status'] === 'Hide') : ?>
+                <h4 class="status-text">Warning....!<br> Suspicious product Detected.Product by Hidden Admin.</h4>
+            <?php else : ?>
+                <p>Product Name: <?php echo $orderRow['Product_name']; ?></p>
+                <p>Available Quantity: <?php echo $orderRow['available_qantity']; ?></p>
+                <p>Rent: <?php echo $orderRow['rent']; ?></p>
+                <button class="delete-product-button" data-product-id="<?php echo $orderRow['product_id']; ?>">Delete Product</button>
+            <?php endif; ?>
         </div>
+    </div>
     <?php
     }
     if (mysqli_num_rows($ordersResult) == 0) {

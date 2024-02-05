@@ -29,6 +29,8 @@ if(isset($_POST["submit"])){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Login</title>
+    <link rel="shortcut icon" href="./Images/fab.jpg" />
+
     <style>
         body {
             font-family: Arial, sans-serif;

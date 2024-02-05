@@ -66,74 +66,85 @@ if (isset($_POST["submit"])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Product</title>
+    <link rel="shortcut icon" href="./Images/fab.jpg" />
+
     <link rel="stylesheet" href="./Css/Style2.css">
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f5f5f5;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
+      body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
 
-        .rag-form {
-            background-color: #fff;
-            border-radius: 8px;
-            padding: 20px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width: 1000px;
-            text-align: center;
-        }
+.rag-form {
+    width: 80%; /* Set form width to 80% */
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
 
-        h3 {
-            color: #333;
-        }
+h3 {
+    color: #333;
+    margin-bottom: 20px;
+}
 
-        form {
-            display: inline-block;
-        }
+form {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap; /* Allow items to wrap to the next line */
+    justify-content: space-between; /* Add space between items */
+}
 
-        label {
-            line-height: 70px;
-            font-weight: bold;
-        }
+label {
+    line-height: 30px;
+    font-weight: bold;
+    font-size: 18px;
+    width: 38%; /* Set label width to 48% for inline alignment */
+    margin-bottom: 10px;
+}
 
-        input,
-        select {
-            padding: 8px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            box-sizing: border-box;
-            width: 70%;
-        }
+input,
+select {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    width: 62%; /* Set input width to 48% for inline alignment */
+    margin-bottom: 15px;
+}
 
-        button {
-            background-color: #4caf50;
-            color: white;
-            padding: 10px;
-            font-size: 18px;
-            margin-left: 100px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
+button {
+    background-color: #4caf50;
+    color: white;
+    padding: 10px;
+    margin-top: 20px; /* Adjusted margin */
+    font-size: 18px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
 
-        button:hover {
-            background-color: #45a049;
-        }
+button:hover {
+    background-color: #45a049;
+}
 
-        .cancle button {
-            margin-top: 20px;
-            background-color: #ccc;
-            color: #333;
-        }
+.cancle button {
+    margin-top: 20px;
+    background-color: #ccc;
+    color: #333;
+}
 
-        .cancle button:hover {
-            background-color: #bbb;
-        }
+.cancle button:hover {
+    background-color: #bbb;
+}
+
     </style>
 </head>
 <body>

@@ -36,6 +36,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['Customer_id'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Customer Profile</title>
+    <link rel="shortcut icon" href="./Images/fab.jpg" />
+
     <link rel="stylesheet" href="Css/Profile.css">
     <style>
         /* Add/Delete as needed for styling */

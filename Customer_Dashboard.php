@@ -15,7 +15,9 @@ $selectedLocation = isset($_GET['location']) ? $_GET['location'] : null;
 // Modify the SQL query based on the selected location
 $query = "SELECT sell_product.*, s_signup.Full_name, City_village, State, District, Pin
           FROM sell_product
-          INNER JOIN s_signup ON sell_product.Seller_id = s_signup.Seller_id";
+          INNER JOIN s_signup ON sell_product.Seller_id = s_signup.Seller_id
+          WHERE sell_product.Product_status != 'Hide'";
+
 
 if ($selectedLocation) {
     // Add a condition to filter by District
@@ -34,6 +36,8 @@ $result = $conn->query($query);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Customer Dashboard</title>
+    <link rel="shortcut icon" href="./Images/fab.jpg" />
+
     <link rel="stylesheet" href="Css/Index2.css">
     
 </head>
