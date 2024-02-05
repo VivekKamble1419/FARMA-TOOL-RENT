@@ -184,6 +184,10 @@ body {
     background-color: #e74c3c; /* Red for Rejected status */
     color: #fff;
 }
+.download {
+    margin-left: 700px;
+    padding: 50px;
+}
 /* ... Your existing CSS code ... */
 
 </style>
@@ -210,6 +214,24 @@ body {
 
     <section class="section-2">
         <h1>Order Details</h1>
+        <div class="download" <?php echo ($orderRow['order_status'] == 'Delivered') ? '' : 'style="display: none;"'; ?>>
+        <a href="Customer_bill.php?id=<?php echo $orderRow['id']; ?>"><button>Genrate Bill</button></a>
+
+</div>
+
+        
+                    <div class="order-tracker">
+            <h2>Order Tracker</h2>
+            <div class="status-bar">
+            <div class="status <?php echo ($orderRow['order_status'] == 'Placed') ? 'active' : ''; ?>">Order Placed </div>
+            <div class="status <?php echo ($orderRow['order_status'] == 'Rejected') ? 'active Rejected' : ''; ?>">Order Rejected </div>
+            <div class="status <?php echo ($orderRow['order_status'] == 'Accepted') ? 'active' : ''; ?>">Order Accepted </div>
+            <div class="status <?php echo ($orderRow['order_status'] == 'Shipped') ? 'active' : ''; ?>">Shipped </div>
+            <div class="status <?php echo ($orderRow['order_status'] == 'Delivered') ? 'active' : ''; ?>">Delivered</div>
+          
+                    
+                </div>
+                </div>
         <div class="card">
             <div class="order-image">
             <img src="<?php echo $imageRow['product_image']; ?>" alt="Product Image">
@@ -222,23 +244,12 @@ body {
                 <p>Order Quantity: <?php echo $orderRow['order_quantity']; ?></p>
                 <p>Place: <?php echo $orderRow['Location']; ?></p>
                 <p>Rent: <?php echo $orderRow['rent']; ?></p>
+                <h4>Payment Mode: Cash On Delivery</h4><br>
                 <h3>Total Payable: <?php echo $orderRow['total_payable']; ?></h3>
             </div>
-
-            <div class="order-tracker">
-    <h2>Order Tracker</h2>
-    <div class="status-bar">
-    <div class="status <?php echo ($orderRow['order_status'] == 'Placed') ? 'active' : ''; ?>">Order Placed </div>
-    <div class="status <?php echo ($orderRow['order_status'] == 'Rejected') ? 'active Rejected' : ''; ?>">Order Rejected </div>
-    <div class="status <?php echo ($orderRow['order_status'] == 'Accepted') ? 'active' : ''; ?>">Order Accepted </div>
-    <div class="status <?php echo ($orderRow['order_status'] == 'Shipped') ? 'active' : ''; ?>">Shipped </div>
-    <div class="status <?php echo ($orderRow['order_status'] == 'Delivered') ? 'active' : ''; ?>">Delivered</div>
-  
             
-</div>
-</div>
-
         </div>
+       
     </section>
 </body>
 </html>

@@ -441,13 +441,16 @@ if (isset($_POST["submit"])) {
         </div>
 
         <div class="equipments">
+        <a href="Customer_login.php">
+
         <div class="card">
         <img src="Images/equipment_1.jpg" alt="Image 1">
         <div class="card-content">
             <h3>Sprayer</h3>
             <p>Sprayer on rent available</p>
         </div>
-        </div>
+        </div></a>
+        <a href="Customer_login.php">
 
         <div class="card">
         <img src="Images/equipment_2.jpg" alt="Image 2">
@@ -455,7 +458,8 @@ if (isset($_POST["submit"])) {
             <h3>Rotaver</h3>
             <p>Rotaver is available </p>
         </div>
-        </div>
+        </div></a>
+        <a href="Customer_login.php">
 
         <div class="card">
         <img src="Images/equipment_3.png" alt="Image 3">
@@ -463,7 +467,8 @@ if (isset($_POST["submit"])) {
             <h3>Tractor</h3>
             <p>Tractor on rent available</p>
         </div>
-        </div>
+        </div> </a>
+        <a href="Customer_login.php">
         <div class="card">
         <img src="Images/equipment_4.jpg" alt="Image 3">
         <div class="card-content">
@@ -471,6 +476,7 @@ if (isset($_POST["submit"])) {
             <p>Rotaver is available</p>
         </div>
         </div>
+        </a>
         </div>
         
     </section>
