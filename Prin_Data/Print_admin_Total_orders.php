@@ -1,6 +1,6 @@
 
 <?php
-require 'connection/config.php';
+require 'config.php';
 
 if (!empty($_SESSION["id"])) {
     $id = $_SESSION['id'];
@@ -20,8 +20,10 @@ $orderResult = mysqli_query($conn, $orderQuery);
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Admin</title>
-    <link rel="shortcut icon" href="./Images/fab.jpg" />
+    <title>All Orders</title>
+    <link rel="shortcut icon" href="fab.jpg" />
+    <link rel="stylesheet" href="Index2.css">
+    <link rel="stylesheet" type="text/css" href="Print.css" media="print">
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -147,38 +149,33 @@ $orderResult = mysqli_query($conn, $orderQuery);
 .order-table tr:nth-child(even) {
     background-color: #f9f9f9;
 }
+.orders-dt{
+        width: 100%;
+        margin: auto;
+        text-align: center;
+        margin-top: 20px;
+    }
     </style>
     <!-- Add this in the <head> section of your HTML -->
 
 </head>
 <body>
-    <header>
-        <h3>Welcome, <?php echo $customerRow['username']; ?></h3>
-    </header>
-
-    <nav>
-         
-        <a href="admin_Dashboard.php">Home</a>
-        <a href="admin_customers.php">Customers</a>
-        <a href="admin_seller.php">Sellers</a>
-        <a href="admin_products.php">Products</a>
-
-    </nav>
-
-    <section class="main">
-    <div class="btns">
-      <a href="admin_Total_Transaction.php"> <button class="btn">Total Transactions</button>  </a>
-      <a href="#" style="text-decoration: none;">
-    <button class="btn" style="background-color: gray; color: black;">Total Orders</button>
-</a>
-      <a href="admin_user_accounts.php"> <button class="btn">User Accounts</button>     </a>
-      <a href="admin_feedback.php"><button class="btn">Feedback</button>
-</a>
-    <a href="logout.php"> <button class="btn">Logout</button>          </a>
-    </div>
+<div class="orders-dt">
+                <div class="text">
+                    <h1><span class="farm">Farm </span><span class="Tools"> Tools </span><span class="Rent"> Rent</span></h1>
+                    <h3>Vishrambag Sangli, Maharashtra,416416</h3>
+                    <h3>Contact: 7709629488 Email: mrvivekkamble8@gmail.com</h3>
+                    <h3>Contact: 8208951770 Email: chaitanyakashid961@gmail.com</h3>
+                    <br>
+                </div>
+                <hr>
+</div>
+    
+   
+     
     <div class="info">
         <h2>Total Orders</h2>
-        <a href="./Prin_Data/Print_admin_Total_orders.php" style="text-decoration: none;" target="_blank">
+        <a href="#" style="text-decoration: none;" id="prnt-btn">
                     <button style="background-color: #4CAF50; /* Green */
                    border: none;
                    color: white;
@@ -189,7 +186,7 @@ $orderResult = mysqli_query($conn, $orderQuery);
                    font-size: 16px;
                    margin: 4px 2px;
                    cursor: pointer;
-                   border-radius: 8px;">
+                   border-radius: 8px;" onclick="window.print()">
                     Download Report
                     </button>
         </a>
@@ -242,7 +239,6 @@ $orderResult = mysqli_query($conn, $orderQuery);
     </div>
     
   
-    </section>
 
 </body>
 </html>

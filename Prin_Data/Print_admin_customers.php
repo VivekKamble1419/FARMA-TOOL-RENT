@@ -1,6 +1,6 @@
 
 <?php
-require 'connection/config.php';
+require 'config.php';
 
 if (!empty($_SESSION["id"])) {
     $id = $_SESSION['id'];
@@ -36,8 +36,11 @@ if (!empty($_POST['Customer_id'])) {
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Admin</title>
-    <link rel="shortcut icon" href="./Images/fab.jpg" />
+    <title>Customer Report</title>
+    <link rel="shortcut icon" href="fab.jpg" />
+    <link rel="stylesheet" href="Index2.css">
+    <link rel="stylesheet" type="text/css" href="Print.css" media="print">
+
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -211,6 +214,12 @@ if (!empty($_POST['Customer_id'])) {
         overflow: hidden;
         text-overflow: ellipsis; /* Show ellipsis (...) for overflowed text */
     }
+    .orders-dt{
+        width: 100%;
+        margin: auto;
+        text-align: center;
+        margin-top: 20px;
+    }
     </style>
     <!-- Add this in the <head> section of your HTML -->
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
@@ -237,54 +246,41 @@ if (!empty($_POST['Customer_id'])) {
 </script>
 </head>
 <body>
-    <header>
-        <h3>Welcome, <?php echo $customerRow['username']; ?></h3>
-    </header>
 
-    <nav>
-         
-        <a href="admin_Dashboard.php">Home</a>
-        <a href="#" style="text-decoration: none; background-color: gray; color: black;">
-            Customers
-        </a>
-        <a href="admin_seller.php">Sellers</a>
-        <a href="admin_products.php">Products</a>
+            <div class="orders-dt">
+                <div class="text">
+                    <h1><span class="farm">Farm </span><span class="Tools"> Tools </span><span class="Rent"> Rent</span></h1>
+                    <h3>Vishrambag Sangli, Maharashtra,416416</h3>
+                    <h3>Contact: 7709629488 Email: mrvivekkamble8@gmail.com</h3>
+                    <h3>Contact: 8208951770 Email: chaitanyakashid961@gmail.com</h3>
+                    <br>
+                </div>
+                <hr>
+            </div>
 
-    </nav>
-
-    <section class="main">
-    <div class="btns">
-      <a href="admin_Total_Transaction.php"> <button class="btn">Total Transactions</button>  </a>
-      <a href="admin_Total_orders.php" >
-    <button class="btn" >Total Orders</button>
-        </a>
-      <a href="admin_user_accounts.php"> <button class="btn">User Accounts</button>     </a>
-      <a href="admin_feedback.php"><button class="btn">Feedback</button>
-        </a>
-    <a href="logout.php"> <button class="btn">Logout</button>          </a>
-    </div>
-
-
+ 
     <div class="info">
-            <h2>Customers</h2>
+        
+            <h2>Customers Report:</h2>
             
           
-            <a href="./Prin_Data/Print_admin_customers.php" style="text-decoration: none;" target="_blank">
-    <button style="background-color: #4CAF50; /* Green */
-               border: none;
-               color: white;
-               padding: 15px 32px;
-               text-align: center;
-               text-decoration: none;
-               display: inline-block;
-               font-size: 16px;
-               margin: 4px 2px;
-               cursor: pointer;
-               border-radius: 8px;">
-        Download Report
-    </button>
-</a>
 
+        <a href="#" style="text-decoration: none;" id="prnt-btn">
+                    <button style="background-color: #4CAF50; /* Green */
+                   border: none;
+                   color: white;
+                   padding: 15px 32px;
+                   text-align: center;
+                   text-decoration: none;
+                   display: inline-block;
+                   font-size: 16px;
+                   margin: 4px 2px;
+                   cursor: pointer;
+                   border-radius: 8px;" onclick="window.print()">
+                    Download Pdf
+                    </button>
+        </a>
+        
         <table class="user-table">
             <thead>
                 <tr>
@@ -338,13 +334,8 @@ if (!empty($_POST['Customer_id'])) {
    
         </div>
         
-    </div>
     
-  
-    </section>
-<!-- ... (your existing HTML code) ... -->
 
-<!-- ... (rest of your HTML code) ... -->
 
 
 </body>

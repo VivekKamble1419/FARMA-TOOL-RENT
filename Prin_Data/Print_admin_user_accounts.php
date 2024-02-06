@@ -1,6 +1,6 @@
 
 <?php
-require 'connection/config.php';
+require 'config.php';
 
 if (!empty($_SESSION["id"])) {
     $id = $_SESSION['id'];
@@ -19,8 +19,10 @@ if (!empty($_SESSION["id"])) {
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Admin</title>
-    <link rel="shortcut icon" href="./Images/fab.jpg" />
+    <title>User Accounts</title>
+    <link rel="shortcut icon" href="fab.jpg" />
+    <link rel="stylesheet" href="Index2.css">
+    <link rel="stylesheet" type="text/css" href="Print.css" media="print">
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -146,66 +148,52 @@ label {
     .user-table tr:nth-child(even) {
         background-color: #f9f9f9;
     }
+    .orders-dt{
+        width: 100%;
+        margin: auto;
+        text-align: center;
+        margin-top: 20px;
+    }
 
     </style>
     <!-- Add this in the <head> section of your HTML -->
 
 </head>
 <body>
-    <header>
-        <h3>Welcome, <?php echo $customerRow['username']; ?></h3>
-    </header>
-
-    <nav>
-         
-        <a href="admin_Dashboard.php">Home</a>
-        <a href="admin_customers.php">Customers</a>
-        <a href="admin_seller.php">Sellers</a>
-        <a href="admin_products.php">Products</a>
-
-    </nav>
-
-    <section class="main">
-    <div class="btns">
-      <a href="admin_Total_Transaction.php"> <button class="btn">Total Transactions</button>  </a>
-      <a href="admin_Total_orders.php" >
-    <button class="btn" >Total Orders</button>
-</a>
-      <a href="#" style="text-decoration: none;"> <button class="btn" style="background-color: gray; color: black;">User Accounts</button>     </a>
-      <a href="admin_feedback.php"><button class="btn">Feedback</button>
-</a>
-    <a href="logout.php"> <button class="btn">Logout</button>          </a>
-    </div>
-    <div class="info">
-            <h2>All Users</h2>
-            
-            <div class="select">
-    <label for="accountType">Select Account Type:</label>
-    <select id="accountType" class="custom-select">
-        <option value="all">All accounts</option>
-        <option value="customer">Customer Accounts</option>
-        <option value="seller">Seller Accounts</option>
-    </select>
-    <button type="button" onclick="searchData()">Search</button>
+<div class="orders-dt">
+                <div class="text">
+                    <h1><span class="farm">Farm </span><span class="Tools"> Tools </span><span class="Rent"> Rent</span></h1>
+                    <h3>Vishrambag Sangli, Maharashtra,416416</h3>
+                    <h3>Contact: 7709629488 Email: mrvivekkamble8@gmail.com</h3>
+                    <h3>Contact: 8208951770 Email: chaitanyakashid961@gmail.com</h3>
+                    <br>
+                </div>
+                <hr>
 </div>
+    
+   
+<h2>All Users</h2>
+<a href="#" style="text-decoration: none;" id="prnt-btn">
+        <button style="background-color: #4CAF50; /* Green */
+       border: none;
+       color: white;
+       padding: 15px 32px;
+       text-align: center;
+       text-decoration: none;
+       display: inline-block;
+       font-size: 16px;
+       margin: 4px 2px;
+       cursor: pointer;
+       border-radius: 8px;" onclick="window.print()">
+        Download Report
+        </button>
+</a>
 
-        <a href="./Prin_Data/Print_admin_user_accounts.php" style="text-decoration: none;" target="_blank">
-                    <button style="background-color: #4CAF50; /* Green */
-                   border: none;
-                   color: white;
-                   padding: 15px 32px;
-                   text-align: center;
-                   text-decoration: none;
-                   display: inline-block;
-                   font-size: 16px;
-                   margin: 4px 2px;
-                   cursor: pointer;
-                   border-radius: 8px;">
-                    Download Report
-                    </button>
-        </a>
-        
-        <div class="user-data">
+    <div class="info">
+            
+    
+
+        <div class="user-data" >
             <?php
 $accountType = isset($_GET['accountType']) ? $_GET['accountType'] : 'all';
 
@@ -266,41 +254,8 @@ if (mysqli_num_rows($result) > 0) {
        
         </div>
         
-    </div>
     
   
-    </section>
-<!-- ... (your existing HTML code) ... -->
-
-<script>
-    function changeAccountType() {
-        var selectedAccountType = document.getElementById("accountType").value;
-        window.location.href = 'your_page.php?accountType=' + selectedAccountType;
-    }
-
-   function searchData() {
-    var selectedAccountType = document.getElementById("accountType").value;
-    var url = 'fetch_data.php?accountType=' + selectedAccountType;
-
-    // Perform an AJAX request to fetch data based on the selected account type
-    // Update the URL and handle the response to update the table
-    // Example using Fetch API
-    fetch(url)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.text();
-        })
-        .then(data => {
-            // Assuming the server returns the HTML content for the table
-            document.querySelector('.user-data').innerHTML = data;
-        })
-        .catch(error => console.error('Error fetching data:', error));
-}
-</script>
-
-<!-- ... (rest of your HTML code) ... -->
 
 
 </body>

@@ -158,6 +158,7 @@ th, tr {
             <div class="menu" id="menu">
                 <a href="Seller_Dashboard.php">Home</a>
                 <a href="Seller_Profile.php">Profile</a>
+                <a href="Seller_income.php">Income</a>
                 <a href="logout.php">Logout</a>
             </div>
             <div class="icon" onclick="toggleMenu()">

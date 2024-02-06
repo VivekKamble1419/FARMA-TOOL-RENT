@@ -1,122 +1,106 @@
-
 <?php
-require 'connection/config.php';
+require 'config.php';
 
-if (!empty($_SESSION["id"])) {
-    $id = $_SESSION['id'];
-    $result = mysqli_query($conn, "SELECT * FROM admins WHERE id=$id");
-    $customerRow = mysqli_fetch_assoc($result);
+if (!empty($_SESSION['Seller_id'])) {
+    $Seller_id = $_SESSION['Seller_id'];
+    $result = mysqli_query($conn, "SELECT * FROM s_signup WHERE Seller_id = $Seller_id");
+    $row = mysqli_fetch_assoc($result);
+    $ordersResult = mysqli_query($conn, "SELECT * FROM orders WHERE Seller_id = $Seller_id ORDER BY order_date_time DESC");
 } else {
-    header("Location: admin_login.php");
+    header("Location: Seller_login.php");
 }
 
 // Fetch orders from the database with order_status = 'Delivered'
-$orderQuery = "SELECT * FROM orders WHERE order_status = 'Delivered'";
+$orderQuery = "SELECT * FROM orders WHERE order_status = 'Delivered' AND Seller_id=$Seller_id" ;
 $orderResult = mysqli_query($conn, $orderQuery);
 // Initialize total payable amount variable
 $totalPayableAmount = 0;
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Admin</title>
-    <link rel="shortcut icon" href="./Images/fab.jpg" />
-    <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            margin: 0;
-            padding: 0;
-        }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seller Income</title>
+    <link rel="shortcut icon" href="fab.jpg" />
+    <link rel="stylesheet" href="Index2.css">
+    <link rel="stylesheet" type="text/css" href="Print.css" media="print">
 
-        header {
-            background-color: #2c384a;
-            color: white;
-            padding: 5px;
-            text-align: center;
-            position: sticky;
-            top: 0;
-            z-index: 1000; /* Set a higher z-index to make sure it's above other elements */
-        }
+    <link rel="stylesheet" href="Css/Index2.css">
+</head>
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+    }
+    .section-2{
+        padding-top: 10%;
+        width: 100%;
+        height: auto;
+        padding-bottom: 100px;
+    }
+    .section-2 h1{
+        margin-left: 4%;
+        padding-bottom: 20px;
+    }
+    .image1 img{
+        width: 80%;
+        height: 250px;
+    }
+    .image1 {
+        width: 100%;
+        margin: auto;
+        align-items: center;
+        text-align: center;
+    }
+    .info1{
+        width: 100%;
+        margin: auto;
+        justify-content: left;
+        line-height: 2;
+        font-size: 20px;
+        font-weight: 600;
+    }
+    .place{
+        width: 100%;
+        margin: auto;
+        align-items: center;
+        text-align: center;
+        font-size: 20px;
+        font-weight: 600;
+    }
+    .orders{
+        width: 80%;
+        height: 300px;
+        margin: auto;
+        margin-top: 2rem;
+        display: flex;
+        background-color: #F5F5F5;
+        box-shadow: 2px 2px 2px 2px gray;
+    }
+    .place p{
+        color: green;
+    }
+    .place .detail{
+        font-size: 14px;
+        color: red;
+    }
+/* Add styles for the rejected class */
+#rejected {
+    color: red;
+    font-weight: 800;
+}
 
-        nav {
-            background-color: gainsboro;
-            padding: 10px;
-            padding-left: 300px;
-            position: sticky;
-            top: 55px; /* Height of the header */
-            z-index: 1000; /* Set a higher z-index to make sure it's above other elements */
-        }
+/* Add styles for the detail class within the rejected class */
+.place.rejected .detail {
+    color: orange; /* Set the color for the detail message within rejected orders */
+}
 
-        nav a {
-          
-            color: black;
-            text-decoration: none;
-            font-size: 18px;
-            padding: 10px;
-            margin: 0 20px;
-        }
 
-        nav a:hover {
-            background-color: #777;
-        }
-
-      
-        .main {
-            display: flex;
-            height: 82vh;
-        }
-
-        .btns {
-            width: 20%; /* 30% width, fixed size */
-            background-color: #3c4b64;
-            padding: 10px;
-            box-sizing: border-box;
-            overflow-y: auto; /* Enable vertical scrolling */
-        }
-        .btns .btn{
-          margin-top: 20px;
-        }
-     
-        .info {
-            flex: 1; /* Takes the remaining 70% */
-            padding: 5px;
-            overflow-y: auto; /* Enable vertical scrolling */
-            display: flex;
-            gap: 10px;
-            justify-content: space-between;
-            flex-wrap: wrap;
-        }
-
-        .btn {
+/* Additional styles for the order details table */
+.order-table {
             width: 100%;
-            background-color: #3c4b64;
-            font-size: 18px;
-            color: white;
-            padding: 10px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-            margin-bottom: 10px;
-        }
-
-        .btn:hover {
-            background-color: #777;
-        }
-      
-        
-        .info {
-            padding: 20px;
-            overflow-y: auto;
-        }
-
-        
-        /* Additional styles for the order details table */
-        .order-table {
-            width: 100%;
+            margin-inline: 30px;
             border-collapse: collapse;
             margin-top: 20px;
         }
@@ -149,38 +133,31 @@ $totalPayableAmount = 0;
 .order-table tr:nth-child(even) {
     background-color: #f9f9f9;
 }
-    </style>
-    <!-- Add this in the <head> section of your HTML -->
-
-</head>
+.orders-dt{
+        width: 100%;
+        margin: auto;
+        text-align: center;
+        margin-top: 20px;
+    }
+</style>
 <body>
-    <header>
-        <h3>Welcome, <?php echo $customerRow['username']; ?></h3>
-    </header>
+<div class="orders-dt">
+                <div class="text">
+                    <h1><span class="farm">Farm </span><span class="Tools"> Tools </span><span class="Rent"> Rent</span></h1>
+                    <h3>Vishrambag Sangli, Maharashtra,416416</h3>
+                    <h3>Contact: 7709629488 Email: mrvivekkamble8@gmail.com</h3>
+                    <h3>Contact: 8208951770 Email: chaitanyakashid961@gmail.com</h3>
+                    <br>
+                </div>
+                <hr>
+</div>
 
-    <nav>
-         
-        <a href="admin_Dashboard.php">Home</a>
-        <a href="admin_customers.php">Customers</a>
-        <a href="admin_seller.php">Sellers</a>
-        <a href="admin_products.php">Products</a>
+    <section class="section-2">
+    <h1>Total Income</h1>
+    <h1>Total Orders (Delivered)</h1>
 
-    </nav>
-
-    <section class="main">
-    <div class="btns">
-      <a href="#"  style="text-decoration: none;"> <button class="btn"  style="background-color: gray; color: black;">Total Transactions</button>  </a>
-      <a href="admin_Total_orders.php">
-    <button class="btn">Total Orders</button>
-</a>
-      <a href="admin_user_accounts.php"> <button class="btn">User Accounts</button>     </a>
-      <a href="admin_feedback.php"><button class="btn">Feedback</button>
-</a>
-    <a href="logout.php"> <button class="btn">Logout</button>          </a>
-    </div>
     <div class="info">
-    <h2>Total Orders (Delivered)</h2>
-        <a href="./Prin_Data/Print_admin_Total_Transaction.php" style="text-decoration: none;" target="_blank">
+    <a href="#" style="text-decoration: none;" id="prnt-btn">
                     <button style="background-color: #4CAF50; /* Green */
                    border: none;
                    color: white;
@@ -191,7 +168,7 @@ $totalPayableAmount = 0;
                    font-size: 16px;
                    margin: 4px 2px;
                    cursor: pointer;
-                   border-radius: 8px;">
+                   border-radius: 8px;" onclick="window.print()">
                     Download Report
                     </button>
         </a>
@@ -252,8 +229,12 @@ $totalPayableAmount = 0;
     </div>
     
   
-    </section>
+  
+</section>
+<script>
 
+</script>
+
+    <script src="JavaScript/Index.js"></script>
 </body>
 </html>
-

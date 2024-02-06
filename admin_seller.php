@@ -272,7 +272,7 @@ if (!empty($_POST['Seller_id'])) {
             
           
 
-        <a href="#" style="text-decoration: none;">
+        <a href="./Prin_Data/Print_admin_seller.php" style="text-decoration: none;" target="_blank">
                     <button style="background-color: #4CAF50; /* Green */
                    border: none;
                    color: white;

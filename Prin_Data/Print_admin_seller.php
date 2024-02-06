@@ -1,6 +1,6 @@
 
 <?php
-require 'connection/config.php';
+require 'config.php';
 
 if (!empty($_SESSION["id"])) {
     $id = $_SESSION['id'];
@@ -11,21 +11,21 @@ if (!empty($_SESSION["id"])) {
 }
 
 // Fetch orders from the database
-$orderQuery = "SELECT * FROM c_signup";
+$orderQuery = "SELECT * FROM s_signup";
 $orderResult = mysqli_query($conn, $orderQuery);
 
 
-if (!empty($_POST['Customer_id'])) {
-    $Customer_id = $_POST['Customer_id'];
+if (!empty($_POST['Seller_id'])) {
+    $Seller_id = $_POST['Seller_id'];
 
   
     // Delete the feedback based on the email
-    $deleteQuery = "DELETE FROM c_signup WHERE Customer_id = '$Customer_id'";
+    $deleteQuery = "DELETE FROM s_signup WHERE Seller_id = '$Seller_id'";
     $result = mysqli_query($conn, $deleteQuery);
 
     if ($result) {
         // Add this line to refresh the page after deletion
-        echo '<script>window.location.href = "admin_customers.php";</script>';
+        echo '<script>window.location.href = "admin_seller.php";</script>';
     }
    
 }
@@ -36,8 +36,10 @@ if (!empty($_POST['Customer_id'])) {
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Admin</title>
-    <link rel="shortcut icon" href="./Images/fab.jpg" />
+    <title>Seller Report</title>
+    <link rel="shortcut icon" href="fab.jpg" />
+    <link rel="stylesheet" href="Index2.css">
+    <link rel="stylesheet" type="text/css" href="Print.css" media="print">
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -211,9 +213,16 @@ if (!empty($_POST['Customer_id'])) {
         overflow: hidden;
         text-overflow: ellipsis; /* Show ellipsis (...) for overflowed text */
     }
+    .orders-dt{
+        width: 100%;
+        margin: auto;
+        text-align: center;
+        margin-top: 20px;
+    }
     </style>
     <!-- Add this in the <head> section of your HTML -->
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<!-- Add this in the <head> section of your HTML -->
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script>
     $(document).ready(function () {
         $('.update-button').click(function () {
@@ -222,9 +231,9 @@ if (!empty($_POST['Customer_id'])) {
 
             $.ajax({
                 type: 'POST',
-                url: 'update_customer_status.php', // Create a new PHP file for handling updates
+                url: 'update_seller_status.php', // Create a new PHP file for handling updates
                 data: {
-                    Customer_id: sellerId,
+                    Seller_id: sellerId,
                     selectedStatus: selectedStatus
                 },
                 success: function (response) {
@@ -235,62 +244,50 @@ if (!empty($_POST['Customer_id'])) {
         });
     });
 </script>
+
 </head>
 <body>
-    <header>
-        <h3>Welcome, <?php echo $customerRow['username']; ?></h3>
-    </header>
-
-    <nav>
-         
-        <a href="admin_Dashboard.php">Home</a>
-        <a href="#" style="text-decoration: none; background-color: gray; color: black;">
-            Customers
-        </a>
-        <a href="admin_seller.php">Sellers</a>
-        <a href="admin_products.php">Products</a>
-
-    </nav>
-
-    <section class="main">
-    <div class="btns">
-      <a href="admin_Total_Transaction.php"> <button class="btn">Total Transactions</button>  </a>
-      <a href="admin_Total_orders.php" >
-    <button class="btn" >Total Orders</button>
-        </a>
-      <a href="admin_user_accounts.php"> <button class="btn">User Accounts</button>     </a>
-      <a href="admin_feedback.php"><button class="btn">Feedback</button>
-        </a>
-    <a href="logout.php"> <button class="btn">Logout</button>          </a>
-    </div>
+<div class="orders-dt">
+                <div class="text">
+                    <h1><span class="farm">Farm </span><span class="Tools"> Tools </span><span class="Rent"> Rent</span></h1>
+                    <h3>Vishrambag Sangli, Maharashtra,416416</h3>
+                    <h3>Contact: 7709629488 Email: mrvivekkamble8@gmail.com</h3>
+                    <h3>Contact: 8208951770 Email: chaitanyakashid961@gmail.com</h3>
+                    <br>
+                </div>
+                <hr>
+</div>
+    
+   
+     
 
 
     <div class="info">
-            <h2>Customers</h2>
+            <h2>Sellers Report</h2>
             
           
-            <a href="./Prin_Data/Print_admin_customers.php" style="text-decoration: none;" target="_blank">
-    <button style="background-color: #4CAF50; /* Green */
-               border: none;
-               color: white;
-               padding: 15px 32px;
-               text-align: center;
-               text-decoration: none;
-               display: inline-block;
-               font-size: 16px;
-               margin: 4px 2px;
-               cursor: pointer;
-               border-radius: 8px;">
-        Download Report
-    </button>
-</a>
 
+            <a href="#" style="text-decoration: none;" id="prnt-btn">
+                    <button style="background-color: #4CAF50; /* Green */
+                   border: none;
+                   color: white;
+                   padding: 15px 32px;
+                   text-align: center;
+                   text-decoration: none;
+                   display: inline-block;
+                   font-size: 16px;
+                   margin: 4px 2px;
+                   cursor: pointer;
+                   border-radius: 8px;" onclick="window.print()">
+                    Download Report
+                    </button>
+        </a>
         <table class="user-table">
             <thead>
                 <tr>
                     <th>No.</th>
 
-                    <th>Customer ID</th>
+                    <th>Seller ID</th>
                     <th>Full Name</th>
                     <th>City/Village</th>
                     <th>State</th>
@@ -310,20 +307,20 @@ if (!empty($_POST['Customer_id'])) {
                     while ($orderRow = mysqli_fetch_assoc($orderResult)) {
                         echo "<tr>";
                         echo "<td>{$counter}</td>";
-                        echo "<td>{$orderRow['Customer_id']}</td>";
+                        echo "<td>{$orderRow['Seller_id']}</td>";
                         echo "<td>{$orderRow['Full_name']}</td>";
                         echo "<td>{$orderRow['City_village']}</td>";
                         echo "<td>{$orderRow['State']}</td>";
                         echo "<td>{$orderRow['District']}</td>";
                         echo "<td>{$orderRow['Pin']}</td>";
                         echo "<td>{$orderRow['Mobile']}</td>";
-                        echo "<td>{$orderRow['Email']}</td>";
+                        echo "<td>{$orderRow['Email']} </td>";
                         echo "<td>{$orderRow['Password']}</td>";
                         echo "<td><select class='hide-display-dropdown'>
                         <option value='Active'" . ($orderRow['Account_status'] == 'Active' ? ' selected' : '') . ">Active</option>
                         <option value='Freeze'" . ($orderRow['Account_status'] == 'Freeze' ? ' selected' : '') . ">Freeze</option>                    </select><button class='update-button'>Update</button></td>";
                         echo "<td><form class='delete-form' method='post' action=''>
-                        <input type='hidden' name='Customer_id' value='{$orderRow['Customer_id']}' />
+                        <input type='hidden' name='Seller_id' value='{$orderRow['Seller_id']}' />
                         <button type='submit' class='Delete'>Delete</button>
                     </form></td>";
                         echo "</tr>";
@@ -338,14 +335,6 @@ if (!empty($_POST['Customer_id'])) {
    
         </div>
         
-    </div>
-    
-  
-    </section>
-<!-- ... (your existing HTML code) ... -->
-
-<!-- ... (rest of your HTML code) ... -->
-
 
 </body>
 </html>
